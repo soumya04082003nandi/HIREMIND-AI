@@ -1,9 +1,12 @@
 const express = require('express');
 const connectDB = require('./config/database');
+const cookieParesr= require("cookie-parser")
 
 
 //setting up the server
 const app = express();
+app.use(cookieParesr())
+app.use(express.json());
 
 
 /**
@@ -21,6 +24,5 @@ app.use("/api/auth",authRouter);
 
 
 
-app.use(express.json());
 
 module.exports = app;
