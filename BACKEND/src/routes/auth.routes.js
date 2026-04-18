@@ -14,5 +14,18 @@ const authRouter=express.Router();
 authRouter.post('/register',authController.handleUserRegistration)
 
 
- 
+
+/**
+ * @route POST /api/auth/login
+ * @desc Rlogin a user with the help of email and password
+ * @access Public   
+ */
+
+
+authRouter.post("/login",authController.handleUserLogin)
+
+
+
+
+
 module.exports=authRouter;

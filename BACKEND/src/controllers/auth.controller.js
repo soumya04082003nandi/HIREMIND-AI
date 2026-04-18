@@ -26,7 +26,7 @@ const handleUserRegistration = async (req, res) => {
         });
 
         if (existingUser) {
-            return res.status(400).json({
+            return res.status(409).json({
                 message: "User already exists, please login"
             });
         }
@@ -77,6 +77,63 @@ const handleUserRegistration = async (req, res) => {
     }
 };
 
+
+/**
+ * @name handleUserLogin
+ * @desc login a new user using  email, and password
+ * @access Public       
+ */
+
+
+const handleUserLogin = async (req, res) => {
+
+    const { email, password } = req.body
+
+    if (!email || !password) {
+        return res.status(400).json({
+            message: "Email and password both are required"
+        })
+    }
+
+    const isUserExist = await userModel.findOne({ email: email })
+
+    if (!isUserExist) {
+        return res.status(401).json({
+            message: "No account found with this email"
+        })
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, isUserExist.password)
+
+    if (!isPasswordValid) {
+        return res.status(401).json({
+            message: "Password missmatched"
+        })
+    }
+    const token = jwt.sign(
+        {
+            id: isUserExist._id,
+            email: email,
+            password: password
+        },
+        process.env.SECRET_KEY,
+        { expiresIn: "1d" }
+    )
+
+    res.cookie("token", token);
+    return res.status(201).json({
+        message:"User logedin successfully",
+         user:{
+            id:isUserExist._id,
+            email: email,
+            password:password
+         }
+    })
+
+
+}
+
 module.exports = {
-    handleUserRegistration
+    handleUserRegistration,
+    handleUserLogin
 };
