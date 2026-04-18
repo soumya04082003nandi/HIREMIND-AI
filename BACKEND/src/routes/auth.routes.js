@@ -17,7 +17,7 @@ authRouter.post('/register',authController.handleUserRegistration)
 
 /**
  * @route POST /api/auth/login
- * @desc Rlogin a user with the help of email and password
+ * @desc login a user with the help of email and password
  * @access Public   
  */
 
@@ -25,6 +25,14 @@ authRouter.post('/register',authController.handleUserRegistration)
 authRouter.post("/login",authController.handleUserLogin)
 
 
+
+
+/**
+ * @route GET /api/auth/logout
+ * @desc loging out a user 
+ * @access Public   
+ */
+authRouter.get("/logout", authController.handleUserLogin)
 
 
 

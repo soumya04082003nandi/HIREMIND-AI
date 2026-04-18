@@ -1,4 +1,5 @@
 const userModel = require("../models/users.model")
+const blacklistModel = require("../models/emailBlacklist.model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 require('dotenv').config()
@@ -133,7 +134,43 @@ const handleUserLogin = async (req, res) => {
 
 }
 
+
+
+
+
+/**
+ * @name handleUserLogout
+ * @desc loging out a user
+ * @access Public       
+ */
+
+const handleUserLogout= async(req,res)=>{
+    const token = req.cookies.token;
+
+    if(!token){
+        return res.status(401).json({
+            message:"You are not loged in , login first"
+        })
+    }
+
+
+    const blacklistToken = new blacklistModel({
+        token
+    })
+
+    res.cookie(token,null)
+
+        return res.status(204).json({
+            message:"loged out successfully"
+        })
+
+}
+
+
+
+
 module.exports = {
     handleUserRegistration,
-    handleUserLogin
+    handleUserLogin,
+    handleUserLogout
 };
