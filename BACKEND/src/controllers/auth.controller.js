@@ -140,12 +140,12 @@ const handleUserLogin = async (req, res) => {
 
 /**
  * @name handleUserLogout
- * @desc loging out a user
+ * @desc loging out a user and removing the token from the cookie and blacklisting the cookie
  * @access Public       
  */
 
 const handleUserLogout = async (req, res) => {
-    const {token} = req.cookies.token;
+    const token = req.cookies.token;
 
     if (!token) {
         return res.status(401).json({
@@ -171,10 +171,29 @@ const handleUserLogout = async (req, res) => {
 }
 
 
+/**
+ * @name handlerGetUser
+ * @desc finding the details of loged in user
+ * @access private  
+ */
+
+const handlerGetUser = async(req,res)=>{
+    const user = await userModel.findById(req.user.id);
+
+    return res.status(200).json({
+        message:"Details of logedin user fetched successfully",
+        user:{
+            id:user.id,
+            email:user.email,
+            password:user.password
+        }
+    })
+}
 
 
 module.exports = {
     handleUserRegistration,
     handleUserLogin,
-    handleUserLogout
+    handleUserLogout,
+    handlerGetUser
 };
