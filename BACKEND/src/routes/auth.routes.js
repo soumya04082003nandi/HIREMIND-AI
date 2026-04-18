@@ -29,10 +29,10 @@ authRouter.post("/login",authController.handleUserLogin)
 
 /**
  * @route GET /api/auth/logout
- * @desc loging out a user 
+ * @desc loging out a user , clear the cookie and add the the cookie in the blacklist db
  * @access Public   
  */
-authRouter.get("/logout", authController.handleUserLogin)
+authRouter.get("/logout", authController.handleUserLogout)
 
 
 

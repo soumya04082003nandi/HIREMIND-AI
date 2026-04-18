@@ -123,12 +123,12 @@ const handleUserLogin = async (req, res) => {
 
     res.cookie("token", token);
     return res.status(201).json({
-        message:"User logedin successfully",
-         user:{
-            id:isUserExist._id,
+        message: "User logedin successfully",
+        user: {
+            id: isUserExist._id,
             email: email,
-            password:password
-         }
+            password: password
+        }
     })
 
 
@@ -144,12 +144,12 @@ const handleUserLogin = async (req, res) => {
  * @access Public       
  */
 
-const handleUserLogout= async(req,res)=>{
-    const token = req.cookies.token;
+const handleUserLogout = async (req, res) => {
+    const {token} = req.cookies.token;
 
-    if(!token){
+    if (!token) {
         return res.status(401).json({
-            message:"You are not loged in , login first"
+            message: "You are not loged in , login first"
         })
     }
 
@@ -158,11 +158,15 @@ const handleUserLogout= async(req,res)=>{
         token
     })
 
-    res.cookie(token,null)
+    await blacklistToken.save()
 
-        return res.status(204).json({
-            message:"loged out successfully"
-        })
+    // await blacklistModel.create({token})
+
+    res.clearCookie("token")
+
+    return res.status(200).json({
+        message: "loged out successfully"
+    })
 
 }
 
