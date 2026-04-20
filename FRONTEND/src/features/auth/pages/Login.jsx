@@ -1,11 +1,23 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import {useNavigate,  Link } from "react-router-dom";
+import { useAuth } from '../hooks/useAuth';
+import Loading from '../components/Loading';
 
 const Login = () => {
+  const navigate = useNavigate()
+  const {loading, handleLogin} = useAuth()
 
-  const handleSubmit =(e)=>{
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const handleSubmit = async(e)=>{
     e.preventDefault(); 
-    console.log("submitted")
+      await handleLogin({email,password})
+        navigate("/")
+  }
+
+  if(loading){
+    return <Loading/>
   }
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-900">
@@ -25,6 +37,7 @@ const Login = () => {
               Email
             </label>
             <input
+              onChange={(e)=>{setEmail(e.target.value)}}
               type="email"
               id="email"
               name="email"
@@ -40,6 +53,7 @@ const Login = () => {
               Password
             </label>
             <input
+              onChange={(e)=>{setPassword(e.target.value)}}
               type="password"
               id="password"
               name="password"

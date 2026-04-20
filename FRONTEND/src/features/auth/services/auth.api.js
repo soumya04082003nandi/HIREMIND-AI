@@ -38,7 +38,7 @@ export const login = async({email,password})=>{
 
 //logout an user
 
-const logout = async()=>{
+export const logout = async()=>{
     try {
         const response= await axios.get('http://localhost:3000/api/auth/logout',{
             withCredentials:true
