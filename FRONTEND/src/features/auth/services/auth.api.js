@@ -1,9 +1,7 @@
 import axios from "axios"
 
 
-/**
- * register a new user, 
- */
+// register a new user, 
 
 export const register = async ({ username, email, password }) => {
     try {
