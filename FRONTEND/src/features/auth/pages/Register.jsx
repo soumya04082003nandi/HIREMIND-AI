@@ -1,11 +1,26 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
+import Loading from '../components/Loading';
 
 const Register = () => {
 
-  const handleSubmit = (e) => {
+  const { loading, handleRegister } = useAuth()
+  const navigate = useNavigate()
+
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submitted")
+    const user = await handleRegister({ username, email, password })
+    if (user)navigate("/")
+
+  }
+
+  if (loading) {
+    return <Loading/>
+    
   }
   return (
 
@@ -26,6 +41,7 @@ const Register = () => {
               Username
             </label>
             <input
+              onChange={(e) => { setUsername(e.target.value) }}
               type="text"
               id="username"
               name="username"
@@ -41,6 +57,7 @@ const Register = () => {
               Email
             </label>
             <input
+              onChange={(e) => { setEmail(e.target.value) }}
               type="email"
               id="email"
               name="email"
@@ -57,6 +74,7 @@ const Register = () => {
               Password
             </label>
             <input
+              onChange={(e) => { setPassword(e.target.value) }}
               type="password"
               id="password"
               name="password"

@@ -4,7 +4,7 @@ import { useAuth } from '../hooks/useAuth';
 import Loading from '../components/Loading';
 
 const Login = () => {
-  const {loading, handleLogin,user} = useAuth()
+  const {loading, handleLogin,} = useAuth()
   const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
