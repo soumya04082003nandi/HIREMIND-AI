@@ -1,8 +1,11 @@
-import { useContext } from "react";
+import { useContext,  } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../auth.context";
 import { login, register, logout } from "../services/auth.api";
 
 export const useAuth = () => {
+
+    const navigate = useNavigate()
     const context = useContext(AuthContext);
 
     if (!context) {
@@ -13,10 +16,16 @@ export const useAuth = () => {
 
     // ✅ Login
     const handleLogin = async ({ email, password }) => {
+
+
         try {
             setLoading(true);
             const data = await login({ email, password });
             setUser(data.user);
+            if (data) {
+                navigate("/")
+            }
+            
         } catch (err) {
             console.error("Login error:", err);
         } finally {
@@ -45,7 +54,7 @@ export const useAuth = () => {
             setUser(null);
         } catch (err) {
             console.error("Logout error:", err);
-        } 
+        }
         finally {
             setLoading(false);
         }
