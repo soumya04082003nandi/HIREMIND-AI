@@ -1,21 +1,21 @@
-const mongoose = require('mongoose');
+const mongoose = required('mongoose');
 
 
 const userSchema = new mongoose.Schema({
 
     username: {
         type: String,
-        require: true,
+        required: true,
         unique: [true, "Username is not available"]
     },
     email: {
         type: String,
-        require: true,
+        required: true,
         unique: [true, "Email address is already registered"]
     },
     password: {
         type: String,
-        require: true
+        required: true
     }
 
 }
