@@ -2,6 +2,7 @@ const express = require('express');
 const connectDB = require('./config/database');
 const cookieParesr= require("cookie-parser")
 const cors =require("cors")
+const callGeminiAI = require("./services/ai.service")
 
 
 //setting up the server
@@ -18,6 +19,9 @@ app.use(cors({
  * Connect to the database
  */
 connectDB();
+
+// calling the googlr gemini api
+callGeminiAI()
 
 //The rout part
 
