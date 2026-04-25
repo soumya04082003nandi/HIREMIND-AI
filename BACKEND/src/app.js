@@ -20,8 +20,6 @@ app.use(cors({
  */
 connectDB();
 
-// calling the googlr gemini api
-callGeminiAI()
 
 //The rout part
 
