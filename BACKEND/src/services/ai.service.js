@@ -39,13 +39,13 @@ const interviewReportSchema = z.object({
 
 async function generateInterviewReport({ resume, selfDescription, jobDescription }) {
 
-
+// create a prompt for the AI model using the input data and the interview report schema to generate a structured interview report as output
     const prompt = `Generate an interview report for a candidate with the following details:
                         Resume: ${resume}
                         Self Description: ${selfDescription}
                         Job Description: ${jobDescription}
 `
-
+ //  getting the response from the AI model by passing the prompt and the interview report schema to ensure the output is in the desired format 
     const response = await ai.models.generateContent({
         model: "gemini-3-flash-preview",
         contents: prompt,
