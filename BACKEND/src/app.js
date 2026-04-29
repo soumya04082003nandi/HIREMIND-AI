@@ -27,7 +27,7 @@ const interviewRouter= require("./routes/interview.routes")
 //use of routes
 app.use("/api/auth",authRouter);
 
-app .use ("/api/intrerview",interviewRouter)
+app.use("/api/interview",interviewRouter)
 
 
 

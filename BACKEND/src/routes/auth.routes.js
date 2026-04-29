@@ -1,7 +1,7 @@
 const express=require("express")
 const authController =require("../controllers/auth.controller")
 const authRouter=express.Router();
-const authUser = require("../middlewares/auth.middleware")
+const authMiddleware = require("../middlewares/auth.middleware")
 
 /**
  * @route POST /api/auth/register
@@ -38,7 +38,7 @@ authRouter.get("/logout", authController.handleUserLogout)
  * @description fetching the details about the loged in user
  * @access private
  */
-authRouter.get("/get-user",authUser.getUser,authController.handlerGetUser)
+authRouter.get("/get-user",authMiddleware.getUser,authController.handlerGetUser)
 
 
 

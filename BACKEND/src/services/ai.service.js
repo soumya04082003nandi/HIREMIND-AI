@@ -39,13 +39,47 @@ const interviewReportSchema = z.object({
 
 async function generateInterviewReport({ resume, selfDescription, jobDescription }) {
 
-// create a prompt for the AI model using the input data and the interview report schema to generate a structured interview report as output
-    const prompt = `Generate an interview report for a candidate with the following details:
-                        Resume: ${resume}
-                        Self Description: ${selfDescription}
-                        Job Description: ${jobDescription}
-`
- //  getting the response from the AI model by passing the prompt and the interview report schema to ensure the output is in the desired format 
+    // create a prompt for the AI model using the input data and the interview report schema to generate a structured interview report as output
+    const prompt = `
+    You are an AI interview assistant.
+
+Generate a structured interview report based on the candidate's details.
+
+STRICT INSTRUCTIONS:
+- Return ONLY valid JSON.
+- Do NOT include any explanation, markdown, or text outside JSON.
+- Follow the exact structure provided.
+
+Fields required:
+- matchScore (0-100 number)
+- technicalQuestions (array of objects with question, intention, answer)
+- behavioralQuestions (same structure)
+- skillGaps (array with skill and severity: low | medium | high)
+- preparationPlan (day-wise plan)
+- title (job title)
+
+Candidate Data:
+Resume: ${resume}
+Self Description: ${selfDescription}
+Job Description: ${jobDescription}
+
+
+Return ONLY valid JSON.
+Do NOT return stringified JSON.
+
+technicalQuestions must be an array of objects like:
+[
+  {
+    "question": "...",
+    "intention": "...",
+    "answer": "..."
+  }
+]
+
+
+`;
+
+    //  getting the response from the AI model by passing the prompt and the interview report schema to ensure the output is in the desired format 
     const response = await ai.models.generateContent({
         model: "gemini-3-flash-preview",
         contents: prompt,
@@ -59,4 +93,4 @@ async function generateInterviewReport({ resume, selfDescription, jobDescription
 
 
 }
-module.exports = generateInterviewReport ;
+module.exports = generateInterviewReport;
