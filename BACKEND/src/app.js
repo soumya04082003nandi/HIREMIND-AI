@@ -2,7 +2,6 @@ const express = require('express');
 const connectDB = require('./config/database');
 const cookieParesr= require("cookie-parser")
 const cors =require("cors")
-const callGeminiAI = require("./services/ai.service")
 
 
 //setting up the server
@@ -21,13 +20,14 @@ app.use(cors({
 connectDB();
 
 
-//The rout part
-
+//importing routes
 const authRouter=require("./routes/auth.routes")
+const interviewRouter= require("./routes/interview.routes")
 
 //use of routes
-
 app.use("/api/auth",authRouter);
+
+app .use ("/api/intrerview",interviewRouter)
 
 
 
