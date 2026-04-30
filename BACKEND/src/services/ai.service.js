@@ -1,96 +1,102 @@
 const { GoogleGenAI } = require("@google/genai");
 require("dotenv").config();
 
-const { z } = require("zod")
-const { zodToJsonSchema } = require("zod-to-json-schema")
-
+// ✅ Initialize AI
 const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
+});
 
-})
+// ✅ Helper: truncate large input
+const truncate = (text, max = 2000) => {
+    if (!text) return "";
+    return text.length > max ? text.slice(0, max) : text;
+};
 
-
-
-const interviewReportSchema = z.object({
-    matchScore: z.number().describe("A score between 0 and 100 indicating how well the candidate's profile matches the job describe"),
-    technicalQuestions: z.array(z.object({
-        question: z.string().describe("The technical question can be asked in the interview"),
-        intention: z.string().describe("The intention of interviewer behind asking this question"),
-        answer: z.string().describe("How to answer this question, what points to cover, what approach to take etc.")
-    })).describe("Technical questions that can be asked in the interview along with their intention and how to answer them"),
-    behavioralQuestions: z.array(z.object({
-        question: z.string().describe("The technical question can be asked in the interview"),
-        intention: z.string().describe("The intention of interviewer behind asking this question"),
-        answer: z.string().describe("How to answer this question, what points to cover, what approach to take etc.")
-    })).describe("Behavioral questions that can be asked in the interview along with their intention and how to answer them"),
-    skillGaps: z.array(z.object({
-        skill: z.string().describe("The skill which the candidate is lacking"),
-        severity: z.enum(["low", "medium", "high"]).describe("The severity of this skill gap, i.e. how important is this skill for the job and how much it can impact the candidate's chances")
-    })).describe("List of skill gaps in the candidate's profile along with their severity"),
-    preparationPlan: z.array(z.object({
-        day: z.number().describe("The day number in the preparation plan, starting from 1"),
-        focus: z.string().describe("The main focus of this day in the preparation plan, e.g. data structures, system design, mock interviews etc."),
-        tasks: z.array(z.string()).describe("List of tasks to be done on this day to follow the preparation plan, e.g. read a specific book or article, solve a set of problems, watch a video etc.")
-    })).describe("A day-wise preparation plan for the candidate to follow in order to prepare for the interview effectively"),
-    title: z.string().describe("The title of the job for which the interview report is generated"),
-})
-
-
-
+// ✅ Main Function
 async function generateInterviewReport({ resume, selfDescription, jobDescription }) {
 
-    // create a prompt for the AI model using the input data and the interview report schema to generate a structured interview report as output
     const prompt = `
-    You are an AI interview assistant.
-
-Generate a structured interview report based on the candidate's details.
-
-STRICT INSTRUCTIONS:
-- Return ONLY valid JSON.
-- Do NOT include any explanation, markdown, or text outside JSON.
-- Follow the exact structure provided.
-
-Fields required:
-- matchScore (0-100 number)
-- technicalQuestions (array of objects with question, intention, answer)
-- behavioralQuestions (same structure)
-- skillGaps (array with skill and severity: low | medium | high)
-- preparationPlan (day-wise plan)
-- title (job title)
-
-Candidate Data:
-Resume: ${resume}
-Self Description: ${selfDescription}
-Job Description: ${jobDescription}
-
+You are an AI interview assistant.
 
 Return ONLY valid JSON.
-Do NOT return stringified JSON.
 
-technicalQuestions must be an array of objects like:
-[
-  {
-    "question": "...",
-    "intention": "...",
-    "answer": "..."
-  }
-]
+STRICT RULES:
+- technicalQuestions MUST be an array of OBJECTS with question, intention, answer
+- behavioralQuestions MUST be an array of OBJECTS with question, intention, answer
+- skillGaps MUST be an array of OBJECTS with skill and severity
+- preparationPlan MUST be an array of OBJECTS with day, focus, tasks
+- Do NOT return strings instead of objects
+- Do NOT include explanation or markdown
 
+FORMAT:
 
+{
+  "matchScore": 85,
+  "technicalQuestions": [
+    {
+      "question": "What is Node.js?",
+      "intention": "Check backend basics",
+      "answer": "Explain event-driven architecture"
+    }
+  ],
+  "behavioralQuestions": [
+    {
+      "question": "Tell me about a challenge",
+      "intention": "Evaluate problem solving",
+      "answer": "Use STAR method"
+    }
+  ],
+  "skillGaps": [
+    {
+      "skill": "System Design",
+      "severity": "high"
+    }
+  ],
+  "preparationPlan": [
+    {
+      "day": 1,
+      "focus": "Node.js",
+      "tasks": ["Learn event loop"]
+    }
+  ],
+  "title": "Backend Developer"
+}
+
+Candidate Data:
+Resume: ${truncate(resume)}
+Self Description: ${truncate(selfDescription)}
+Job Description: ${truncate(jobDescription)}
 `;
 
-    //  getting the response from the AI model by passing the prompt and the interview report schema to ensure the output is in the desired format 
-    const response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
-        contents: prompt,
-        config: {
-            responseMimeType: "application/json",
-            responseSchema: zodToJsonSchema(interviewReportSchema),
+    try {
+        const response = await ai.models.generateContent({
+            model: "gemini-2.5-flash-lite",
+            contents: prompt,
+            config: {
+                responseMimeType: "application/json",
+            },
+        });
+
+        // ✅ Extract text safely
+        const rawText =
+            response.text ||
+            response.candidates?.[0]?.content?.parts?.[0]?.text;
+
+        if (!rawText) {
+            console.log("No response from AI");
+            return;
         }
-    })
 
-    return JSON.parse(response.text)
+        const parsed = JSON.parse(rawText);
 
+        // ✅ Just log the output
+        // console.log("Generated Interview Report:\n", parsed);
 
+        return parsed;
+
+    } catch (error) {
+        console.error("Error generating report:", error.message);
+    }
 }
+
 module.exports = generateInterviewReport;
