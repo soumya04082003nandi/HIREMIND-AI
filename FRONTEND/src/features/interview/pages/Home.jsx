@@ -1,13 +1,16 @@
-import React from "react";
+import React , {useState}from "react";
+
+
 
 const Home = () => {
+  const [resumeFile, setResumeFile] = useState(null);
   return (
     <div className="w-full min-h-screen bg-[#0d1117] text-[#e6edf3] flex flex-col items-center justify-center px-6 py-12 gap-8 font-sans">
 
       {/* Header */}
       <header className="text-center">
         <h1 className="text-3xl font-bold mb-2">
-          Create Your Custom <span className="text-pink-500">Interview Plan</span>
+          Create Your Custom <span className="text-pink-600">Interview Plan</span>
         </h1>
         <p className="text-gray-400 text-sm max-w-md mx-auto">
           Let our AI analyze the job requirements and your unique profile to build a winning strategy.
@@ -23,7 +26,7 @@ const Home = () => {
           {/* Left Panel */}
           <div className="flex-1 flex flex-col gap-4 p-6 relative">
             <div className="flex items-center gap-2">
-              <span className="text-pink-500">📄</span>
+              <span className="text-pink-600">📄</span>
               <h2 className="text-sm font-semibold flex-1">Target Job Description</h2>
               <span className="text-xs px-2 py-0.5 border border-pink-500 text-pink-500 rounded bg-pink-500/10">
                 Required
@@ -54,17 +57,25 @@ const Home = () => {
 
             {/* Upload */}
             <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium flex items-center gap-2">
+              <label  className="text-sm font-medium  flex items-center gap-2">
                 Upload Resume
-                <span className="text-xs px-2 py-0.5 border border-pink-500 text-pink-500 rounded bg-pink-500/10">
+                <span className="text-xs px-2 py-0.5 border border-pink-600 text-pink-600 rounded bg-pink-600/10">
                   Best Results
                 </span>
+                
               </label>
+              <input onChange={(e)=>setResumeFile(e.target.files[0])} type="file" className="hidden" accept=".pdf" id="resume-upload" />
+              
 
-              <div className="flex flex-col items-center justify-center gap-1 p-6 bg-[#1e2535] border-2 border-dashed border-[#2a3348] rounded-lg cursor-pointer hover:border-pink-500 hover:bg-pink-500/5 transition">
-                <p className="text-sm font-medium">Click to upload or drag & drop</p>
-                <p className="text-xs text-gray-400">PDF or DOCX (Max 5MB)</p>
-              </div>
+              <label htmlFor="resume-upload" className="flex flex-col  items-center justify-center gap-1 p-6 bg-[#1e2535] border-2 border-dashed border-[#2a3348] rounded-lg cursor-pointer hover:border-pink-500 hover:bg-pink-500/5 transition">
+                <p className="text-sm font-medium">
+                  {resumeFile ? resumeFile.name : "Click to upload or drag & drop"}
+                  </p>
+                <p className="text-xs text-gray-400">PDF  (Max 5MB)</p>
+                {/* <p  className="text-xs text-gray-400">
+                  {resumeFile ? resumeFile.name : "No file selected"}
+                </p> */}
+              </label>
             </div>
 
             {/* OR */}
@@ -100,7 +111,7 @@ const Home = () => {
             AI-Powered Strategy Generation • Approx 30s
           </span>
 
-          <button className="flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-pink-500 to-pink-600 text-white text-sm font-semibold rounded-lg hover:opacity-90 active:scale-95 transition">
+          <button className="flex items-center gap-2 px-5 py-2 bg-linear-to-r from-pink-500 to-pink-600 text-white text-sm font-semibold rounded-lg hover:opacity-90 active:scale-95 transition">
             ⭐ Generate My Interview Strategy
           </button>
         </div>
