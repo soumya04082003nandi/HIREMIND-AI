@@ -62,6 +62,8 @@ export const useAuth = () => {
     const getAndSetUser = async () => {
         try {
             const data = await getUser();
+            // console.log(data);
+            
 
             if (data && data.user) {
                 setUser(data.user);

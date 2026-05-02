@@ -56,7 +56,7 @@ export const getUser= async()=>{
         const response=await axios.get('http://localhost:3000/api/auth/get-user',{
             withCredentials:true
         })
-
+        // console.log(response.data);
         return response.data
     } catch (err) {
         console.log(err)

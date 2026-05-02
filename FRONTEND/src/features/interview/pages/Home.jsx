@@ -1,8 +1,13 @@
 import React , {useState}from "react";
+import { AuthContext } from "../../auth/auth.context";
 
 
 
 const Home = () => {
+
+  const { user } = React.useContext(AuthContext);
+
+  
   const [resumeFile, setResumeFile] = useState(null);
   return (
     <div className="w-full min-h-screen bg-[#0d1117] text-[#e6edf3] flex flex-col items-center justify-center px-6 py-12 gap-8 font-sans">
@@ -52,7 +57,7 @@ const Home = () => {
             {/* Header */}
             <div className="flex items-center gap-2">
               <span className="text-pink-500">👤</span>
-              <h2 className="text-sm font-semibold">Your Profile</h2>
+              <h2 className="text-sm font-semibold"> {`${user?.username}'s `|| "Your"} Profile</h2>
             </div>
 
             {/* Upload */}
