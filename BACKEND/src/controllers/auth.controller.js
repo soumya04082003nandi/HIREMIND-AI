@@ -185,6 +185,7 @@ const handlerGetUser = async(req,res)=>{
         user:{
             id:user.id,
             email:user.email,
+            username:user.username,
             password:user.password
         }
     })
