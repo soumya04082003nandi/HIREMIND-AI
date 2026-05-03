@@ -98,12 +98,12 @@ const Interview = () => {
   const [activeNav, setActiveNav] = useState("technical")
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0d1117] via-[#111827] to-[#020617] text-white p-6">
+    <div className="min-h-screen bg-linear-to-br from-[#0d1117] via-[#111827] to-[#020617] text-white p-6">
       
       <div className="max-w-7xl mx-auto flex gap-6">
 
         {/* LEFT NAV */}
-        <nav className="w-[220px] bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-4 flex flex-col justify-between">
+        <nav className="w-55 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-4 flex flex-col justify-between">
           
           <div>
             <p className="text-xs text-gray-400 mb-4 uppercase tracking-wider">
@@ -128,7 +128,7 @@ const Interview = () => {
             </div>
           </div>
 
-          <button className="mt-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white py-2 rounded-lg text-sm hover:opacity-90 transition">
+          <button className="mt-4 bg-linear-to-r from-pink-500 to-purple-500 text-white py-2 rounded-lg text-sm hover:opacity-90 transition">
             Download Resume
           </button>
         </nav>
@@ -161,14 +161,14 @@ const Interview = () => {
         </main>
 
         {/* RIGHT SIDEBAR */}
-        <aside className="w-[260px] bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-6">
+        <aside className="w-65 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-6">
           
           {/* SCORE */}
           <div className="text-center">
             <p className="text-xs text-gray-400 mb-2">Match Score</p>
 
             <div className="w-28 h-28 mx-auto rounded-full flex items-center justify-center 
-            bg-gradient-to-br from-pink-500 to-purple-500 shadow-lg shadow-pink-500/30">
+            bg-linear-to-br from-pink-500 to-purple-500 shadow-lg shadow-pink-500/30">
               <span className="text-3xl font-bold">{dummyReport.matchScore}%</span>
             </div>
 
