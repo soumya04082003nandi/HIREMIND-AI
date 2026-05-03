@@ -128,6 +128,9 @@ const interviewReportSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "users"
 
+    },
+    title:{
+        type: String
     }
 }, {
     timestamps: true
