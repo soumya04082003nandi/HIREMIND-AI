@@ -3,6 +3,8 @@ const generateInterviewReport = require("../services/ai.service")
 const interviewReportModel = require("../models/interviewReport.model")
 
 
+
+
 const handleGenerateInterviewReport = async (req,res)=>{
 
     const resumeContent=await (new pdfParse.PDFParse(Uint8Array.from(req.file.buffer)) ).getText() 
@@ -33,6 +35,27 @@ const handleGenerateInterviewReport = async (req,res)=>{
 
 
 
+const handleGetInterviewReportById= async (req,res)=>{
+    const {interviewId} = req.params
+
+    const interviewReport = await interviewReportModel.findOne({
+        _id:interviewId,
+        user:req.user.id
+    })
+
+    if (!interviewReport) {
+        return res.status(404).json({
+            message:"Interview report not found"
+        })
+    }
+
+    return res.status(200).json({
+        message:"Interview report retrieved successfully",
+        interviewReport
+    })
+}
+
 module.exports = {
-    handleGenerateInterviewReport
+    handleGenerateInterviewReport,
+    handleGetInterviewReportById
 }
