@@ -55,7 +55,22 @@ const handleGetInterviewReportById= async (req,res)=>{
     })
 }
 
+
+const handleGetAllInterviewReportsForUser = async (req, res) => {
+  const allReports = await interviewReportModel
+    .find({ user: req.user.id })   // ✅ only query here
+    .sort({ createdAt: -1 })       // ✅ chain after find
+    .select("-resume -jobDescription -selfDescription -technicalQuestions -behavioralQuestions -skillGaps -preparationPlan -__v");
+
+    return res.status(200).json({
+        message:"All interview reports retrieved successfully",
+        allReports
+    })
+  console.log(allReports);
+};
+
 module.exports = {
     handleGenerateInterviewReport,
-    handleGetInterviewReportById
+    handleGetInterviewReportById,
+    handleGetAllInterviewReportsForUser
 }
