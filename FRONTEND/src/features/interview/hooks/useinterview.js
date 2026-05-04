@@ -10,15 +10,16 @@ export const useInterview = () => {
         throw new Error("useInterview must be used within an InterviewProvider");
     }
 
-    const { loading, setLoading, interviewReport, setInterviewReport, allReports, setAllReports } = context;
+    const { loading, setLoading, report, setreport, allReports, setAllReports } = context;
 
     const generateReport = async ({jobDescription , selfDescription, resumeFile}) => {
 
         setLoading(true);
         try{
-            const report = await generateInterviewReport({jobDescription , selfDescription, resumeFile});
-            setInterviewReport(report);
-            return report.interviewReport;
+            const response = await generateInterviewReport({jobDescription , selfDescription, resumeFile});
+            setreport(response.interviewReport);
+            console.log(response.interviewReport);
+            return response.interviewReport;
         } catch (error) {
             console.error("Error generating interview report:", error);
         } finally {
@@ -29,8 +30,8 @@ export const useInterview = () => {
     const fetchReportById = async (interviewId) => {
         setLoading(true);
         try {
-            const report = await getInterviewReportById(interviewId);
-            setInterviewReport(report);
+            const response = await getInterviewReportById(interviewId);
+            setreport(response.interviewReport);
         } catch (error) {
             console.error("Error fetching interview report by ID:", error);
         } finally {
@@ -53,8 +54,8 @@ export const useInterview = () => {
     return {
         loading,
         setLoading,
-        interviewReport,
-        setInterviewReport,
+        report,
+        setreport,
         allReports,
         setAllReports,
         generateReport,

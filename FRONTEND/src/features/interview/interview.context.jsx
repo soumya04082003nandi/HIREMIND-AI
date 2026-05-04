@@ -4,7 +4,7 @@ export const InterviewContext = createContext();
 
 export const InterviewProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
-  const [interviewReport, setInterviewReport] = useState(null);
+  const [report, setreport] = useState(null);
   const [allReports, setAllReports] = useState([]);
 
   return (
@@ -12,8 +12,8 @@ export const InterviewProvider = ({ children }) => {
       value={{
         loading,
         setLoading,
-        interviewReport,
-        setInterviewReport,
+        report,
+        setreport,
         allReports,
         setAllReports
       }}

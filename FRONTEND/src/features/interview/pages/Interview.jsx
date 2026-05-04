@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { use, useState } from "react"
+import { useInterview } from "../hooks/useinterview"
 
 const NAV_ITEMS = [
   { id: "technical", label: "Technical" },
@@ -6,22 +7,24 @@ const NAV_ITEMS = [
   { id: "roadmap", label: "Roadmap" },
 ]
 
-const dummyReport = {
-  matchScore: 85,
-  technicalQuestions: [
-    { question: "Explain event loop?", intention: "Check async understanding", answer: "Event loop handles async tasks..." },
-  ],
-  behavioralQuestions: [
-    { question: "Tell me about yourself", intention: "Communication skill", answer: "I am a developer..." },
-  ],
-  preparationPlan: [
-    { day: 1, focus: "JavaScript Basics", tasks: ["Closures", "Promises"] },
-  ],
-  skillGaps: [
-    { skill: "DSA", severity: "high" },
-    { skill: "System Design", severity: "medium" },
-  ],
-}
+// const dummyReport = {
+//   matchScore: 85,
+//   technicalQuestions: [
+//     { question: "Explain event loop?", intention: "Check async understanding", answer: "Event loop handles async tasks..." },
+//   ],
+//   behavioralQuestions: [
+//     { question: "Tell me about yourself", intention: "Communication skill", answer: "I am a developer..." },
+//   ],
+//   preparationPlan: [
+//     { day: 1, focus: "JavaScript Basics", tasks: ["Closures", "Promises"] },
+//   ],
+//   skillGaps: [
+//     { skill: "DSA", severity: "high" },
+//     { skill: "System Design", severity: "medium" },
+//   ],
+// }
+
+
 
 // ── Question Card ────────────────────────
 const QuestionCard = ({ item, index }) => {
@@ -96,6 +99,8 @@ const RoadMapDay = ({ day }) => (
 // ── MAIN UI ─────────────────────────────
 const Interview = () => {
   const [activeNav, setActiveNav] = useState("technical")
+  const {report} = useInterview();
+  
 
   return (
     <div className="min-h-screen bg-linear-to-br from-[#0d1117] via-[#111827] to-[#020617] text-white p-6">
@@ -144,17 +149,17 @@ const Interview = () => {
 
           <div className="space-y-3">
             {activeNav === "technical" &&
-              dummyReport.technicalQuestions.map((q, i) => (
+              report.technicalQuestions.map((q, i) => (
                 <QuestionCard key={i} item={q} index={i} />
               ))}
 
             {activeNav === "behavioral" &&
-              dummyReport.behavioralQuestions.map((q, i) => (
+              report.behavioralQuestions.map((q, i) => (
                 <QuestionCard key={i} item={q} index={i} />
               ))}
 
             {activeNav === "roadmap" &&
-              dummyReport.preparationPlan.map(day => (
+              report.preparationPlan.map(day => (
                 <RoadMapDay key={day.day} day={day} />
               ))}
           </div>
@@ -169,7 +174,7 @@ const Interview = () => {
 
             <div className="w-28 h-28 mx-auto rounded-full flex items-center justify-center 
             bg-linear-to-br from-pink-500 to-purple-500 shadow-lg shadow-pink-500/30">
-              <span className="text-3xl font-bold">{dummyReport.matchScore}%</span>
+              <span className="text-3xl font-bold">{report.matchScore}%</span>
             </div>
 
             <p className="text-xs text-green-400 mt-3">
@@ -182,7 +187,7 @@ const Interview = () => {
             <p className="text-xs text-gray-400 mb-3">Skill Gaps</p>
 
             <div className="flex flex-wrap gap-2">
-              {dummyReport.skillGaps.map((gap, i) => (
+              {report.skillGaps.map((gap, i) => (
                 <span
                   key={i}
                   className="px-3 py-1 text-xs rounded-full bg-white/10 text-gray-300"
