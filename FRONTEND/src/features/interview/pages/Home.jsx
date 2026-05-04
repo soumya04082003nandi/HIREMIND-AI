@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AuthContext } from "../../auth/auth.context";
 import { useInterview } from "../hooks/useinterview";
 import { useNavigate } from "react-router-dom";
-import Loading from "../../auth/components/Loading";
+import GenerateLoader from "../components/Generateloader";
 
 const Home = () => {
   const { loading, generateReport } = useInterview();
@@ -41,7 +41,7 @@ const Home = () => {
   };
 
   if (loading) {
-    return <Loading />;
+    return <GenerateLoader />;
   }
 
   return (

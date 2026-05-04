@@ -139,7 +139,7 @@ const Interview = () => {
         </nav>
 
         {/* CENTER */}
-        <main className="flex-1 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 overflow-y-auto max-h-[90vh]">
+        <main className="flex-1 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 overflow-y-auto no-scrollbar max-h-[90vh]">
           
           <h2 className="text-xl font-semibold mb-6">
             {activeNav === "technical" && "Technical Questions"}
@@ -177,8 +177,8 @@ const Interview = () => {
               <span className="text-3xl font-bold">{report.matchScore}%</span>
             </div>
 
-            <p className="text-xs text-green-400 mt-3">
-              Strong match
+            <p className={`text-sm ${report.matchScore >= 80 ? 'text-green-400' : report.matchScore >= 60 ? 'text-yellow-400' : 'text-red-400'} mt-3`}>
+              {report.matchScore >= 80 ? "Strong match" : report.matchScore >= 60 ? "Moderate match" : "Poor match"} 
             </p>
           </div>
 
