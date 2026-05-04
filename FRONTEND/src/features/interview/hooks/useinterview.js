@@ -18,6 +18,7 @@ export const useInterview = () => {
         try{
             const report = await generateInterviewReport({jobDescription , selfDescription, resumeFile});
             setInterviewReport(report);
+            return report.interviewReport;
         } catch (error) {
             console.error("Error generating interview report:", error);
         } finally {
