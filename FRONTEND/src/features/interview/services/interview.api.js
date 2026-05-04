@@ -22,8 +22,8 @@ export const generateInterviewReport = async ({jobDescription , selfDescription,
 }
 
 //function to call the handleGetInterviewReportById controller for fetching any specific report based on their interviewId
-export const getInterviewReportById = async (req,res)=>{
-  const response = await api.get(`/api/interview/report/${req.interviewId}`);
+export const getInterviewReportById = async (interviewId)=>{
+  const response = await api.get(`/api/interview/report/${interviewId}`);
 
 
   return response.data
@@ -31,7 +31,7 @@ export const getInterviewReportById = async (req,res)=>{
 
 
 //function to call the handleGetAllInterviewReportsForUser controller for fetching all reports for a specific user
-export const getAllReportsForUser = async (req,res)=>{
+export const getAllReportsForUser = async ()=>{
   const response = await api.get("/api/interview/all-reports");
 
   return response.data
