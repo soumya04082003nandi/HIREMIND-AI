@@ -76,7 +76,7 @@ const Home = () => {
               value={jobDescription}
               onChange={(e) => setJobDescription(e.target.value)}
               name="jobDescription"
-              className="w-full flex-1 bg-[#1e2535] border border-[#2a3348] rounded-lg p-3 text-sm outline-none focus:border-pink-500 resize-none"
+              className="w-full flex-1 bg-[#1e2535] border border-[#2a3348] overflow-y-auto no-scrollbar rounded-lg p-3 text-sm outline-none focus:border-pink-500 resize-none"
               placeholder="Paste the full job description here..."
               maxLength={5000}
             />
@@ -151,7 +151,7 @@ const Home = () => {
                 value={selfDescription}
                 onChange={(e) => setSelfDescription(e.target.value)}
                 name="selfDescription"
-                className="w-full h-24 bg-[#1e2535] border border-[#2a3348] rounded-lg p-3 text-sm outline-none focus:border-pink-500 resize-none"
+                className="w-full h-24 bg-[#1e2535] border border-[#2a3348] rounded-lg p-3 text-sm outline-none overflow-y-auto no-scrollbar  focus:border-pink-500 resize-none"
                 placeholder="Briefly describe your experience..."
               />
             </div>
