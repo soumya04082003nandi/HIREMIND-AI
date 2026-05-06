@@ -1,10 +1,12 @@
 import {generateInterviewReport,getInterviewReportById,getAllReportsForUser } from '../services/interview.api'
-import { useContext } from 'react'
+import { useContext , useEffect} from 'react'
 import { InterviewContext } from '../interview.context'
+import {useParams} from 'react-router-dom'
 
 export const useInterview = () => {
 
     const context = useContext(InterviewContext);
+    const {interviewId} = useParams();
 
     if (!context) {
         throw new Error("useInterview must be used within an InterviewProvider");
@@ -32,6 +34,7 @@ export const useInterview = () => {
         try {
             const response = await getInterviewReportById(interviewId);
             setReport(response.interviewReport);
+            return response.interviewReport;
         } catch (error) {
             console.error("Error fetching interview report by ID:", error);
         } finally {
@@ -50,6 +53,15 @@ export const useInterview = () => {
             setLoading(false);
         }
     }
+
+  useEffect (()=>{
+    if(interviewId){
+        fetchReportById(interviewId)
+    }else{
+        fetchAllReportsForUser()
+    }
+  },[interviewId]);
+
 
     return {
         loading,

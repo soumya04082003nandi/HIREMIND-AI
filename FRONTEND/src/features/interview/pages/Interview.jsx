@@ -1,5 +1,7 @@
-import React, { use, useState } from "react"
+import React, {useState, useEffect} from "react"
 import { useInterview } from "../hooks/useinterview"
+import {  useParams } from "react-router-dom"
+
 
 const NAV_ITEMS = [
   { id: "technical", label: "Technical" },
@@ -100,8 +102,9 @@ const RoadMapDay = ({ day }) => (
 const Interview = () => {
   const [activeNav, setActiveNav] = useState("technical")
   const {report} = useInterview();
+  const {interviewId}= useParams()
   
-
+  
   return (
     <div className="min-h-screen bg-linear-to-br from-[#0d1117] via-[#111827] to-[#020617] text-white p-6">
       
