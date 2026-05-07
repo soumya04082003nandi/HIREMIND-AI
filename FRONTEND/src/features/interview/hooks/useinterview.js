@@ -20,7 +20,6 @@ export const useInterview = () => {
         try{
             const response = await generateInterviewReport({jobDescription , selfDescription, resumeFile});
             setReport(response.interviewReport);
-            console.log(report);
             return response.interviewReport;
         } catch (error) {
             console.error("Error generating interview report:", error);
@@ -32,6 +31,8 @@ export const useInterview = () => {
     const fetchReportById = async (interviewId) => {
         setLoading(true);
         try {
+            // console.log("in hook layer " , interviewId);
+            
             const response = await getInterviewReportById(interviewId);
             setReport(response.interviewReport);
             return response.interviewReport;
@@ -55,6 +56,8 @@ export const useInterview = () => {
     }
 
   useEffect (()=>{
+    // console.log("use effect ", interviewId);
+    
     if(interviewId){
         fetchReportById(interviewId)
     }else{

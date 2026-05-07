@@ -23,8 +23,9 @@ export const generateInterviewReport = async ({jobDescription , selfDescription,
 
 //function to call the handleGetInterviewReportById controller for fetching any specific report based on their interviewId
 export const getInterviewReportById = async (interviewId)=>{
+  // console.log("ins api layer" , interviewId);
+  
   const response = await api.get(`/api/interview/report/${interviewId}`);
-
 
   return response.data
 }

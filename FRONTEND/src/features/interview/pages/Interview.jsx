@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from "react"
+import React, { useState, useEffect } from "react"
 import { useInterview } from "../hooks/useinterview"
-import {  useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
+import GenerateLoader from "../components/Generateloader"
 
 
 const NAV_ITEMS = [
@@ -8,6 +9,9 @@ const NAV_ITEMS = [
   { id: "behavioral", label: "Behavioral" },
   { id: "roadmap", label: "Roadmap" },
 ]
+
+
+
 
 // const dummyReport = {
 //   matchScore: 85,
@@ -34,7 +38,7 @@ const QuestionCard = ({ item, index }) => {
 
   return (
     <div className="group rounded-xl border border-white/10 bg-white/5 backdrop-blur-lg hover:bg-white/10 transition-all duration-300">
-      
+
       <div
         onClick={() => setOpen(!open)}
         className="flex items-start gap-3 p-4 cursor-pointer"
@@ -101,18 +105,24 @@ const RoadMapDay = ({ day }) => (
 // ── MAIN UI ─────────────────────────────
 const Interview = () => {
   const [activeNav, setActiveNav] = useState("technical")
-  const {report} = useInterview();
-  const {interviewId}= useParams()
-  
-  
+  const { interviewId } = useParams()
+  const { report } = useInterview();
+
+  if (!report) {
+    return (
+      <GenerateLoader />
+    )
+
+  }
+
   return (
     <div className="min-h-screen bg-linear-to-br from-[#0d1117] via-[#111827] to-[#020617] text-white p-6">
-      
+
       <div className="max-w-7xl mx-auto flex gap-6">
 
         {/* LEFT NAV */}
         <nav className="w-55 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-4 flex flex-col justify-between">
-          
+
           <div>
             <p className="text-xs text-gray-400 mb-4 uppercase tracking-wider">
               Sections
@@ -124,11 +134,10 @@ const Interview = () => {
                   key={item.id}
                   onClick={() => setActiveNav(item.id)}
                   className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all
-                  ${
-                    activeNav === item.id
+                  ${activeNav === item.id
                       ? "bg-linear-to-r from-pink-500/0 to-purple-500/20 text-white"
                       : "text-gray-400 hover:bg-white/10 hover:text-white"
-                  }`}
+                    }`}
                 >
                   {item.label}
                 </button>
@@ -143,7 +152,7 @@ const Interview = () => {
 
         {/* CENTER */}
         <main className="flex-1 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 overflow-y-auto no-scrollbar max-h-[90vh]">
-          
+
           <h2 className="text-xl font-semibold mb-6">
             {activeNav === "technical" && "Technical Questions"}
             {activeNav === "behavioral" && "Behavioral Questions"}
@@ -170,7 +179,7 @@ const Interview = () => {
 
         {/* RIGHT SIDEBAR */}
         <aside className="w-65 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-6">
-          
+
           {/* SCORE */}
           <div className="text-center">
             <p className="text-xs text-gray-400 mb-2">Match Score</p>
@@ -181,7 +190,7 @@ const Interview = () => {
             </div>
 
             <p className={`text-sm ${report.matchScore >= 80 ? 'text-green-400' : report.matchScore >= 60 ? 'text-yellow-400' : 'text-red-400'} mt-3`}>
-              {report.matchScore >= 80 ? "Strong match" : report.matchScore >= 60 ? "Moderate match" : "Poor match"} 
+              {report.matchScore >= 80 ? "Strong match" : report.matchScore >= 60 ? "Moderate match" : "Poor match"}
             </p>
           </div>
 
