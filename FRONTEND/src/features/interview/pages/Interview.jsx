@@ -106,7 +106,7 @@ const RoadMapDay = ({ day }) => (
 const Interview = () => {
   const [activeNav, setActiveNav] = useState("technical")
   const { interviewId } = useParams()
-  const { report } = useInterview();
+  const { report,allReports } = useInterview();
 
   if (!report) {
     return (
@@ -213,7 +213,18 @@ const Interview = () => {
         </aside>
 
       </div>
+
+
+      <div className="all-reports">
+        <p>
+               {allReports}
+        </p>
+             
+      </div>
     </div>
+
+
+
   )
 }
 

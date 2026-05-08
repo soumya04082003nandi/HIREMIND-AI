@@ -35,6 +35,7 @@ export const useInterview = () => {
             
             const response = await getInterviewReportById(interviewId);
             setReport(response.interviewReport);
+            // setAllReports(response.interviewReport)
             return response.interviewReport;
         } catch (error) {
             console.error("Error fetching interview report by ID:", error);
