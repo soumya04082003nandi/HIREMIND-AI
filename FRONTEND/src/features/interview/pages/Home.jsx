@@ -245,10 +245,14 @@ const Home = () => {
                   </p>
                 </div>
               </div>
-
+              <div className="flex gap-6">
+                <span className={`px-2 py-1 rounded-md ${report.matchScore>80 ? 'bg-green-500/70' : report.matchScore >=60? 'bg-yellow-500/50': 'bg-red-500/50'}` }>
+                {report.matchScore}%
+                </span>
               <span className="text-xs px-2 py-1 rounded-md bg-green-500/10 text-green-400 border border-green-500/20">
                 Completed
               </span>
+              </div>
             </div>
 
             
