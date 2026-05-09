@@ -30,4 +30,13 @@ const interviewRouter = express.Router()
 
 interviewRouter.get("/all-reports", authMiddleware.getUser, interviewController.handleGetAllInterviewReportsForUser)
 
+
+/**
+ * @route GET /api/interview/generate-resume-pdf
+ * @desc Generate a PDF resume based on the candidate's resume, self description and job description using AI
+ * @access Private
+ */
+
+interviewRouter.get("/generate-resume-pdf/:interviewId", authMiddleware.getUser, interviewController.handleGenerateResumePdf)
+
 module.exports = interviewRouter

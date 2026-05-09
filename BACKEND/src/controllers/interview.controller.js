@@ -72,14 +72,18 @@ const handleGetAllInterviewReportsForUser = async (req, res) => {
 const handleGenerateResumePdf = async (req,res)=>{
   const {interviewId} = req.params
 
-  const interviewReport =await interviewReportModel.findById({interviewId});
+  const interviewReport =await interviewReportModel.findById(interviewId);
 
   if(!interviewReport){
     return res.status(404).json({
         message:"Interview report not found."
     })}
     const {resume,jobDescription,selfDescription}= interviewReport
-    const pdfBuffer= generateResumePdf({resume,jobDescription, selfDescription})
+    // console.log({
+    //     resume, selfDescription,jobDescription
+    // });
+    
+    const pdfBuffer= await generateResumePdf({resume,jobDescription, selfDescription})
 
     res.set({
         "Content-type":"Application/pdf",
