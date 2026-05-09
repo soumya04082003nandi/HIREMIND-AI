@@ -185,23 +185,90 @@ const Home = () => {
 
 
 {/* All reports section */}
-      <div className="w-full max-w-5xl bg-[#161b22] border border-[#2a3348] rounded-2xl p-6 mt-8">
-        <h2 className="text-xl font-semibold mb-4">My Interview Reports</h2>  
-        <div className="flex flex-col gap-3">
-          {/* Map through reports and display them */}
-          {/* {allReports.map(report => ( */}
-          {allReports.length === 0 ? (
-            <p className="text-gray-400">No reports generated yet.</p>    
-          ) : (
-            allReports.map(report => (
-              <div key={report._id} className="p-4 bg-[#1e2535] border border-[#2a3348] rounded-lg">
-                <h3 className="text-lg font-semibold">{report.title}</h3>
-                <p className="text-gray-400">{report.description}</p>
-              </div>
-            ))
-          )}
-        </div>
+      <div className="w-full max-w-5xl mt-8">
+  {/* Section Header */}
+  <div className="flex items-center justify-between mb-5">
+    <div>
+      <h2 className="text-2xl font-bold text-white">
+        My Interview Reports
+      </h2>
+      <p className="text-sm text-gray-400 mt-1">
+        View and revisit your previously generated AI interview strategies.
+      </p>
+    </div>
+
+    <div className="px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-400 text-sm font-medium">
+      {allReports.length} Reports
+    </div>
+  </div>
+
+  {/* Main Container */}
+  <div className="bg-[#161b22] border border-[#2a3348] rounded-2xl p-5 shadow-xl">
+
+    {allReports.length === 0 ? (
+      <div className="flex flex-col items-center justify-center py-14 text-center">
+        <div className="text-5xl mb-4">📄</div>
+
+        <h3 className="text-lg font-semibold text-white">
+          No Reports Yet
+        </h3>
+
+        <p className="text-gray-400 text-sm mt-2 max-w-sm">
+          Generate your first AI-powered interview strategy to see your reports here.
+        </p>
       </div>
+    ) : (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {allReports.map((report) => (
+          <div
+            key={report._id}
+            onClick={() => navigate(`/interview/report/${report._id}`)}
+            className="group relative overflow-hidden bg-[#1e2535] border border-[#2a3348] rounded-xl p-5 cursor-pointer transition-all duration-300 hover:border-pink-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-pink-500/10"
+          >
+            {/* Glow Effect */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-linear-to-r from-pink-500/5 to-transparent pointer-events-none" />
+
+            {/* Top Row */}
+            <div className="flex items-start justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-xl">
+                  📑
+                </div>
+
+                <div>
+                  <h3 className="text-base font-semibold text-white line-clamp-1">
+                    {report.title}
+                  </h3>
+
+                  <p className="text-xs text-gray-400 mt-1">
+                    {new Date(report.createdAt).toLocaleDateString()}
+                  </p>
+                </div>
+              </div>
+
+              <span className="text-xs px-2 py-1 rounded-md bg-green-500/10 text-green-400 border border-green-500/20">
+                Completed
+              </span>
+            </div>
+
+            
+
+            {/* Footer */}
+            <div className="flex items-center justify-between mt-5 pt-4 border-t border-[#2a3348]">
+              <span className="text-xs text-gray-400">
+                AI Generated Report
+              </span>
+
+              <button className="text-sm text-pink-400 font-medium group-hover:translate-x-1 transition">
+                View Report →
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</div>
 
       {/* Footer */}
       <footer className="flex gap-6 text-xs text-gray-400">
