@@ -215,12 +215,6 @@ const Interview = () => {
       </div>
 
 
-      <div className="all-reports">
-        <p>
-               {allReports}
-        </p>
-             
-      </div>
     </div>
 
 

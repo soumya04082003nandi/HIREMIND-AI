@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import GenerateLoader from "../components/Generateloader";
 
 const Home = () => {
-  const { loading, generateReport } = useInterview();
+  const { loading, generateReport, allReports } = useInterview();
   const [jobDescription, setJobDescription] = useState("");
   const [selfDescription, setSelfDescription] = useState("");
   const [resumeFile, setResumeFile] = useState(null);
@@ -180,6 +180,26 @@ const Home = () => {
           >
             ⭐ Generate My Interview Strategy
           </button>
+        </div>
+      </div>
+
+
+{/* All reports section */}
+      <div className="w-full max-w-5xl bg-[#161b22] border border-[#2a3348] rounded-2xl p-6 mt-8">
+        <h2 className="text-xl font-semibold mb-4">My Interview Reports</h2>  
+        <div className="flex flex-col gap-3">
+          {/* Map through reports and display them */}
+          {/* {allReports.map(report => ( */}
+          {allReports.length === 0 ? (
+            <p className="text-gray-400">No reports generated yet.</p>    
+          ) : (
+            allReports.map(report => (
+              <div key={report._id} className="p-4 bg-[#1e2535] border border-[#2a3348] rounded-lg">
+                <h3 className="text-lg font-semibold">{report.title}</h3>
+                <p className="text-gray-400">{report.description}</p>
+              </div>
+            ))
+          )}
         </div>
       </div>
 

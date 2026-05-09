@@ -46,9 +46,14 @@ export const useInterview = () => {
 
     const fetchAllReportsForUser = async () => {
         setLoading(true);
+         console.log("fetchallreportsforuse called");
+         
         try {
-            const reports = await getAllReportsForUser();
-            setAllReports(reports);
+            const response = await getAllReportsForUser();
+            setAllReports(response.allReports);
+
+            console.log(allReports);
+            
         } catch (error) {
             console.error("Error fetching all interview reports for user:", error);
         } finally {
