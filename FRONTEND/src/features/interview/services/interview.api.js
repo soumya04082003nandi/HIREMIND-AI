@@ -11,22 +11,17 @@ export const generateInterviewReport = async ({jobDescription , selfDescription,
   formData.append("jobDescription", jobDescription);
   formData.append("selfDescription", selfDescription);
   formData.append("resume", resumeFile);
-
   const response = await api.post("/api/interview", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
   });
-
   return response.data;
 }
 
 //function to call the handleGetInterviewReportById controller for fetching any specific report based on their interviewId
 export const getInterviewReportById = async (interviewId)=>{
-  // console.log("ins api layer" , interviewId);
-  
   const response = await api.get(`/api/interview/report/${interviewId}`);
-
   return response.data
 }
 
@@ -34,7 +29,6 @@ export const getInterviewReportById = async (interviewId)=>{
 //function to call the handleGetAllInterviewReportsForUser controller for fetching all reports for a specific user
 export const getAllReportsForUser = async ()=>{
   const response = await api.get("/api/interview/all-reports");
-
   return response.data
 }
 

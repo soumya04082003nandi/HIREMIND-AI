@@ -15,7 +15,6 @@ export const useInterview = () => {
     const { loading, setLoading, report, setReport, allReports, setAllReports } = context;
 
     const generateReport = async ({jobDescription , selfDescription, resumeFile}) => {
-
         setLoading(true);
         try{
             const response = await generateInterviewReport({jobDescription , selfDescription, resumeFile});
@@ -31,11 +30,8 @@ export const useInterview = () => {
     const fetchReportById = async (interviewId) => {
         setLoading(true);
         try {
-            // console.log("in hook layer " , interviewId);
-            
             const response = await getInterviewReportById(interviewId);
             setReport(response.interviewReport);
-            // setAllReports(response.interviewReport)
             return response.interviewReport;
         } catch (error) {
             console.error("Error fetching interview report by ID:", error);
@@ -45,15 +41,10 @@ export const useInterview = () => {
     }
 
     const fetchAllReportsForUser = async () => {
-        setLoading(true);
-         console.log("fetchallreportsforuse called");
-         
+        setLoading(true);       
         try {
             const response = await getAllReportsForUser();
             setAllReports(response.allReports);
-
-            console.log(allReports);
-            
         } catch (error) {
             console.error("Error fetching all interview reports for user:", error);
         } finally {
