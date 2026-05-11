@@ -4,7 +4,7 @@ const GeneratePdfLoader = () => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#020617]/70 backdrop-blur-md">
 
-      <div className="relative w-[420px] overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-xl">
+      <div className="relative w-105 overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-xl">
 
         {/* glow effects */}
         <div className="absolute -top-10 -left-10 h-40 w-40 rounded-full bg-pink-500/10 blur-3xl" />
@@ -24,7 +24,7 @@ const GeneratePdfLoader = () => {
               <div className="absolute inset-3 rounded-full border-[3px] border-purple-500/20 border-b-purple-400 animate-[spin_2s_linear_infinite_reverse]" />
 
               {/* center icon */}
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-pink-500 to-purple-600 shadow-lg shadow-pink-500/30">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br from-pink-500 to-purple-600 shadow-lg shadow-pink-500/30">
                 <FileText className="h-6 w-6 text-white" />
               </div>
 
@@ -70,7 +70,7 @@ const GeneratePdfLoader = () => {
 
                   <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/10">
 
-                    <div className="h-full w-1/2 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 animate-[loading_1.4s_ease-in-out_infinite]" />
+                    <div className="h-full w-1/2 rounded-full bg-linear-to-r from-pink-500 to-purple-500 animate-[loading_1.4s_ease-in-out_infinite]" />
 
                   </div>
 
@@ -102,7 +102,7 @@ const GeneratePdfLoader = () => {
 
                   <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/10">
 
-                    <div className="h-full w-2/3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 animate-pulse" />
+                    <div className="h-full w-2/3 rounded-full bg-linear-to-r from-purple-500 to-pink-500 animate-pulse" />
 
                   </div>
 
