@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useInterview } from "../hooks/useinterview"
 import { useParams } from "react-router-dom"
 import GenerateLoader from "../components/Generateloader"
-import Loading from "../../auth/components/Loading"
+import GeneratePdfLoader from "../components/GeneratePdfLoader"
 
 
 const NAV_ITEMS = [
@@ -115,6 +115,11 @@ const Interview = () => {
     )
 
   }
+
+    if(loading){
+      return(<GeneratePdfLoader />)
+    }
+
 
   return (
     <div className="min-h-screen bg-linear-to-br from-[#0d1117] via-[#111827] to-[#020617] text-white p-6">
