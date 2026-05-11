@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useInterview } from "../hooks/useinterview"
 import { useParams } from "react-router-dom"
 import GenerateLoader from "../components/Generateloader"
+import Loading from "../../auth/components/Loading"
 
 
 const NAV_ITEMS = [
@@ -106,7 +107,7 @@ const RoadMapDay = ({ day }) => (
 const Interview = () => {
   const [activeNav, setActiveNav] = useState("technical")
   const { interviewId } = useParams()
-  const { report,allReports } = useInterview();
+  const { report,allReports,getResumedf,loading } = useInterview();
 
   if (!report) {
     return (
@@ -145,7 +146,9 @@ const Interview = () => {
             </div>
           </div>
 
-          <button className="mt-4 bg-linear-to-r from-pink-500 to-purple-500 text-white py-2 rounded-lg text-sm hover:opacity-90 transition">
+          <button className="mt-4 bg-linear-to-r from-pink-500 to-purple-500 text-white py-2 rounded-lg text-sm hover:opacity-90 transition"
+          onClick={()=>{getResumedf(interviewId)}}
+          >
             Download Resume
           </button>
         </nav>

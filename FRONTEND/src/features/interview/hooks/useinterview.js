@@ -1,12 +1,12 @@
-import {generateInterviewReport,getInterviewReportById,getAllReportsForUser } from '../services/interview.api'
-import { useContext , useEffect} from 'react'
+import { generateInterviewReport, getInterviewReportById, getAllReportsForUser, generateResumePdf } from '../services/interview.api'
+import { useContext, useEffect } from 'react'
 import { InterviewContext } from '../interview.context'
-import {useParams} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 export const useInterview = () => {
 
     const context = useContext(InterviewContext);
-    const {interviewId} = useParams();
+    const { interviewId } = useParams();
 
     if (!context) {
         throw new Error("useInterview must be used within an InterviewProvider");
@@ -14,10 +14,10 @@ export const useInterview = () => {
 
     const { loading, setLoading, report, setReport, allReports, setAllReports } = context;
 
-    const generateReport = async ({jobDescription , selfDescription, resumeFile}) => {
+    const generateReport = async ({ jobDescription, selfDescription, resumeFile }) => {
         setLoading(true);
-        try{
-            const response = await generateInterviewReport({jobDescription , selfDescription, resumeFile});
+        try {
+            const response = await generateInterviewReport({ jobDescription, selfDescription, resumeFile });
             setReport(response.interviewReport);
             return response.interviewReport;
         } catch (error) {
@@ -41,7 +41,7 @@ export const useInterview = () => {
     }
 
     const fetchAllReportsForUser = async () => {
-        setLoading(true);       
+        setLoading(true);
         try {
             const response = await getAllReportsForUser();
             setAllReports(response.allReports);
@@ -52,15 +52,38 @@ export const useInterview = () => {
         }
     }
 
-  useEffect (()=>{
-    // console.log("use effect ", interviewId);
-    
-    if(interviewId){
-        fetchReportById(interviewId)
-    }else{
-        fetchAllReportsForUser()
+
+    const getResumedf = async (interviewId) => {
+        setLoading(true);
+        let response = null;
+        try {
+            response = await generateResumePdf({ interviewId });
+            const url = window.URL.createObjectURL(new Blob([response], { type: 'application/pdf' }));
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = "resume.pdf";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            // cleanup memory
+            window.URL.revokeObjectURL(url);
+            return response;
+        } catch (error) {
+            console.error("Error generating resume PDF:", error);
+        } finally {
+            setLoading(false);
+        }
     }
-  },[interviewId]);
+
+    useEffect(() => {
+        // console.log("use effect ", interviewId);
+
+        if (interviewId) {
+            fetchReportById(interviewId)
+        } else {
+            fetchAllReportsForUser()
+        }
+    }, [interviewId]);
 
 
     return {
@@ -72,6 +95,7 @@ export const useInterview = () => {
         setAllReports,
         generateReport,
         fetchReportById,
-        fetchAllReportsForUser
+        fetchAllReportsForUser,
+        getResumedf
     };
 }

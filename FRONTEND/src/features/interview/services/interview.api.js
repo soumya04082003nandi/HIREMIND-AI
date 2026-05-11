@@ -32,3 +32,12 @@ export const getAllReportsForUser = async ()=>{
   return response.data
 }
 
+
+//function to call the generateResumePdf to generate the resume pdf for a specific interview report
+export const generateResumePdf = async ({interviewId})=>{ 
+  const response = await api.get(`/api/interview/generate-resume-pdf/${interviewId}`, {
+    responseType: "blob",
+  });
+  return response.data
+}
+
