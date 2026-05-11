@@ -2,12 +2,14 @@ import { RouterProvider } from "react-router-dom"
 import { router } from "./app.route.jsx"
 import { AuthProvider } from "./features/auth/auth.context.jsx"
 import { InterviewProvider } from "./features/interview/interview.context.jsx"
-// import ParticalBg from "./features/auth/components/ParticalBg.jsx"
+import ParticlelBg from "./features/auth/components/ParticleBg.jsx"
 
 const App = () => {
   return (   
     <AuthProvider>
+     
       <InterviewProvider>
+        <ParticlelBg/>
         <RouterProvider router={router} />
       </InterviewProvider>
     </AuthProvider>
