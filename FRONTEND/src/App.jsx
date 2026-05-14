@@ -11,7 +11,6 @@ const App = () => {
      
       <InterviewProvider>
         <ParticlelBg/>
-        <Navbar/>
         <RouterProvider router={router} />
       </InterviewProvider>
     </AuthProvider>
