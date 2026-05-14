@@ -12,6 +12,12 @@
     background: #1d1d1d;
 }
 
+html ::-webkit-scrollbar,
+body ::-webkit-scrollbar{
+  display: none;
+}
+
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
