@@ -47,7 +47,7 @@ const Home = () => {
   }
 
   return (
-    <div className="w-full min-h-screen overflow-x-hidden bg-[#0d1117] text-[#e6edf3] flex flex-col items-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 gap-8 font-sans">
+    <div className="w-full min-h-screen overflow-x-hidden bg-linear-to-br from-[#0d1117] via-[#111827] to-[#020617] text-[#e6edf3] flex flex-col items-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 gap-8 font-sans">
 
       {/* Header */}
       <header className="text-center">

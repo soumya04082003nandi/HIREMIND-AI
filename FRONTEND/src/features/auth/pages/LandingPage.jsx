@@ -1,6 +1,6 @@
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-[#0f0f0f] text-white">
+    <div className="min-h-screen bg-linear-to-br from-[#0d1117] via-[#111827] to-[#020617] text-white">
 
       {/* Background Glow */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
@@ -9,20 +9,7 @@ export default function LandingPage() {
       </div>
 
       {/* Navbar */}
-      <nav className="flex justify-between items-center px-8 py-5 max-w-6xl mx-auto">
-        <h1 className="text-xl font-bold">MyProject</h1>
-
-        <div className="hidden md:flex gap-8 text-gray-300">
-          <a href="#" className="hover:text-white">Home</a>
-          <a href="#features" className="hover:text-white">Features</a>
-          <a href="#about" className="hover:text-white">About</a>
-        </div>
-
-        <button className="bg-white text-black px-4 py-2 rounded-lg font-medium">
-          Get Started
-        </button>
-      </nav>
-
+     
       {/* Hero Section */}
       <section className="text-center px-6 pt-24 pb-16 max-w-4xl mx-auto">
 

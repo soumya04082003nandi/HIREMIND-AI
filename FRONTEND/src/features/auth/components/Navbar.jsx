@@ -3,14 +3,18 @@ import { Link } from 'react-router-dom'
 import logo from "../../../asset/logo.png"
 const Navbar = () => {
   return (
-    <nav className=" flex items-center justify-between w-full h-10 bg-pink-500 z-999">
-      <div className="nav-left"><img src={logo}  alt="logo"className='w-12' /></div>
-      <div className="nav-right">
-    <Link to="/home">home</Link>
-    <Link></Link>
+<nav className="backdrop-blur-lg  bg-linear-to-br from-[#0d1117] via-[#111827] to-[#020617] border-b border-white/10 flex items-center py-4 px-10 w-full z-50">
+        <h1 className="text-md font-bold ">HIREMIND-<span className='text-pink-500'>AI</span> </h1>
 
-      </div>
-    </nav>
+        <div className="hidden md:flex gap-8 text-gray-300">
+          <Link to="/login">Login</Link>
+          <Link to="/home" >Home</Link>
+          
+        </div>
+
+       
+      </nav>
+
   )
 }
 
