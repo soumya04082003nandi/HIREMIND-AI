@@ -20,11 +20,11 @@ export const router = createBrowserRouter([
     element: <Layout />,   // <-- comma required here
     children: [
       {
-        path: "/landing",
+        path: "/",
         element: <LandingPage/>
       },
       {
-        path: "/",
+        path: "/home",
         element: (
           <Protected>
             <Home />
