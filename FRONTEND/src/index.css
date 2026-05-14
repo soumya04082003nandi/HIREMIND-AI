@@ -26,3 +26,10 @@ body ::-webkit-scrollbar{
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.cursiv {
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight:400;
+  font-style: normal;
+}
