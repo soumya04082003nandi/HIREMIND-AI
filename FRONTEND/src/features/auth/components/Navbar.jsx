@@ -14,7 +14,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="backdrop-blur-lg bg-[#0d1117]/90 border-b border-white/10 w-full sticky top-0 z-50">
+    <nav className="backdrop-blur-lg  bg-[#0d1117] border-b border-white/10 w-full sticky top-0 z-50">
       <div className="flex justify-between items-center py-4 px-6 md:px-10">
         
         {/* Logo */}
