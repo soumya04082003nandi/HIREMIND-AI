@@ -8,13 +8,13 @@ const Loading = () => {
         
         {/* Pulse Circle */}
         <div className="relative">
-          <div className="w-16 h-16 bg-sky-500 rounded-full animate-ping absolute opacity-30"></div>
-          <div className="w-16 h-16 bg-sky-400 rounded-full"></div>
+          <div className="w-16 h-16 bg-pink-500 rounded-full animate-ping absolute opacity-30"></div>
+          <div className="w-16 h-16 bg-pink-600  rounded-full"></div>
         </div>
 
         {/* Loading Text with Dots */}
         <div className="flex items-center gap-1 text-slate-200 text-lg font-medium">
-          Loading
+          Loading 
           <span className="animate-bounce [animation-delay:0s]">.</span>
           <span className="animate-bounce [animation-delay:0.2s]">.</span>
           <span className="animate-bounce [animation-delay:0.4s]">.</span>
