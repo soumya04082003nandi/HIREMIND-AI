@@ -59,6 +59,9 @@ export const router = createBrowserRouter([
           </Protected>
         ),
       },
+      {
+        path: "/logout"
+      }
     ],
   },
 ]);

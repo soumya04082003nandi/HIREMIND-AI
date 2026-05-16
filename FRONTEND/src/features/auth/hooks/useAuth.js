@@ -1,8 +1,10 @@
 import { useContext,useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../auth.context";
 import { login, register, logout, getUser } from "../services/auth.api";
 
 export const useAuth = () => {
+    const navigate=useNavigate()
 
     const context = useContext(AuthContext);
 
@@ -49,6 +51,8 @@ export const useAuth = () => {
             setLoading(true);
             await logout();
             setUser(null);
+            navigate("/")
+            
         } catch (err) {
             console.error("Logout error:", err);
         }
