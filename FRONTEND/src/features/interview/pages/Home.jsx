@@ -233,7 +233,7 @@ const Home = () => {
         </div>
 
         {/* Reports Container */}
-        <div className="bg-[#161b22] border border-[#2a3348] rounded-2xl p-4 sm:p-5 shadow-xl">
+        <div id="my-reports" className="bg-[#161b22] border border-[#2a3348] rounded-2xl p-4 sm:p-5 shadow-xl">
 
           {allReports.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-14 text-center">

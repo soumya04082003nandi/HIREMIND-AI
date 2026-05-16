@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import logo from "../../../asset/logo.png"
 import { useAuth } from '../hooks/useAuth'
+import { HashLink } from 'react-router-hash-link'
 const Navbar = () => {
 
   const { user } = useAuth()
@@ -14,8 +15,17 @@ const Navbar = () => {
       <div className="hidden md:flex gap-8 text-gray-300">
         <Link to={"/"} className='cursor-pointer hover:text-pink-500 transition duration-300' >Home</Link>
         <Link to="/home" className='cursor-pointer hover:text-pink-500 transition duration-300' >Generate Report</Link>
-        {!user && <Link to="/login" className='cursor-pointer hover:text-pink-500 transition duration-300'>Login</Link>}
-        {user && <Link to={"/home"} className='cursor-pointer hover:text-pink-500 transition duration-300'>test</Link>}
+        {!user && <Link to="/login" className='cursor-pointer hover:text-pink-500 transition duration-300'>Login/Register</Link>}
+        {user && <Link to={"/logout"} className='cursor-pointer hover:text-pink-500 transition duration-300'>Logout</Link>}
+        {user && (
+          <HashLink
+            to={"/home#my-reports"}
+            smooth
+            className='cursor-pointer hover:text-pink-500 transition duration-300'
+          >
+            My Reports
+          </HashLink>
+        )}
 
       </div>
 
