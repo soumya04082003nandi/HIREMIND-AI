@@ -9,7 +9,7 @@ const app = express();
 app.use(cookieParesr())
 app.use(express.json());
 app.use(cors({
-    origin: "https://hiremind.online/",
+    origin: "https://hiremind.online",
     credentials:true
 }))
 
