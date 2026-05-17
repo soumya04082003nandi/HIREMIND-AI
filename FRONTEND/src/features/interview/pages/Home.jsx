@@ -15,6 +15,7 @@ const Home = () => {
   const { user } = React.useContext(AuthContext);
 
   const navigate = useNavigate();
+// console.log(allReports);
 
   const handleGenerateReport = async () => {
     if (!jobDescription.trim()) {
@@ -254,6 +255,7 @@ const Home = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
 
               {allReports.map((report) => (
+                
                 <div
                   key={report._id}
                   onClick={() =>

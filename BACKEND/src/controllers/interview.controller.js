@@ -94,9 +94,26 @@ const handleGenerateResumePdf = async (req,res)=>{
 
 }
 
+// Deleting a specific report
+const handleDeleteReport= async (req,res)=>{
+    try {
+        const {reportId}= req.params
+        await interviewReportModel.findOneAndDelete({_id: reportId})
+        return res.status(200).json({
+            sucess:true,
+            message: " reporte deleted from DB"
+        })
+    } catch (error) {
+        console.log(error);
+        
+    }
+
+};
+
 module.exports = {
     handleGenerateInterviewReport,
     handleGetInterviewReportById,
     handleGetAllInterviewReportsForUser,
-    handleGenerateResumePdf
+    handleGenerateResumePdf,
+    handleDeleteReport
 }
