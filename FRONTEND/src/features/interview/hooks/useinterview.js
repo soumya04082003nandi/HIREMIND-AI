@@ -78,17 +78,15 @@ export const useInterview = () => {
 
     const deleteReport = async (reportId) => {
         setLoading(true);
+        console.log("hit, id ", reportId);
+        
 
         try {
             const response = await deleteReportById(reportId);
 
-            if (response?.data?.success) {
-                console.log("Report deleted successfully");
-
-                setAllReports((prev) =>
+           setAllReports((prev) =>
                     prev.filter((report) => report._id !== reportId)
                 );
-            }
         } catch (error) {
             console.error("Error deleting the report", error);
         } finally {

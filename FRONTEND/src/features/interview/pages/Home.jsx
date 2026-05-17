@@ -3,10 +3,10 @@ import { AuthContext } from "../../auth/auth.context";
 import { useInterview } from "../hooks/useinterview";
 import { useNavigate } from "react-router-dom";
 import GenerateLoader from "../components/Generateloader";
-import {Astroid} from "lucide-react"
+import {Astroid,Trash2} from "lucide-react"
 
 const Home = () => {
-  const { loading, generateReport, allReports } = useInterview();
+  const { loading, generateReport, allReports ,deleteReport } = useInterview();
 
   const [jobDescription, setJobDescription] = useState("");
   const [selfDescription, setSelfDescription] = useState("");
@@ -258,10 +258,7 @@ const Home = () => {
                 
                 <div
                   key={report._id}
-                  onClick={() =>
-                    navigate(`/interview/report/${report._id}`)
-                  }
-                  className="group relative overflow-hidden bg-[#1e2535] border border-[#2a3348] rounded-xl p-5 cursor-pointer transition-all duration-300 hover:border-pink-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-pink-500/10"
+                  className="group relative overflow-hidden bg-[#1e2535] border border-[#2a3348] rounded-xl p-5  transition-all duration-300 hover:border-pink-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-pink-500/10"
                 >
 
                   {/* Glow */}
@@ -304,17 +301,25 @@ const Home = () => {
                       <span className="text-xs px-2 py-1 rounded-md bg-green-500/10 text-green-400 border border-green-500/20">
                         Completed
                       </span>
+
                     </div>
                   </div>
 
                   {/* Footer */}
                   <div className="flex items-center justify-between mt-5 pt-4 border-t border-[#2a3348]">
-
+                        <button className="cursor-pointer"
+                        onClick={()=>{deleteReport(report._id)
+                          
+                        }}>
+                         <Trash2 size={20} color="#e41b4d" strokeWidth={1.5} />
+                        </button>
                     <span className="text-xs text-gray-400">
                       AI Generated Report
                     </span>
 
-                    <button className="text-sm text-pink-400 font-medium group-hover:translate-x-1 transition">
+                    <button onClick={() =>
+                    navigate(`/interview/report/${report._id}`)
+                  } className="text-sm text-pink-400 font-medium cursor-pointer group-hover:translate-x-1 transition">
                       View Report →
                     </button>
 

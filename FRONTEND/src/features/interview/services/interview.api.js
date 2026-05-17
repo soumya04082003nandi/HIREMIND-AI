@@ -43,9 +43,8 @@ export const generateResumePdf = async ({interviewId})=>{
 
 //function to call the handleDeleteReport controller  for deleting a report
 
-export const deleteReportById = async ({reportId})=>{
+export const deleteReportById = async (reportId)=>{
   const response = await api.delete(`/api/interview/report/${reportId}`)
-  console.log(response);  
-  return response
+    return response
 }
 
