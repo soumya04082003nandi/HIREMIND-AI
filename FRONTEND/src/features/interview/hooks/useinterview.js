@@ -54,21 +54,26 @@ export const useInterview = () => {
 
 
     const getResumedf = async (interviewId) => {
-    setLoading(true);
-
-    try {
-        // Direct download approach (BEST for mobile + desktop)
-        window.open(
-            `https://hiremind-ai-f33f.onrender.com/api/interview/generate-resume-pdf/${interviewId}`,
-            "_blank"
-        );
-
-    } catch (error) {
-        console.error("Error generating resume PDF:", error);
-    } finally {
-        setLoading(false);
+        setLoading(true);
+        let response = null;
+        try {
+            response = await generateResumePdf({ interviewId });
+            const url = window.URL.createObjectURL(new Blob([response], { type: 'application/pdf' }));
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = "resume.pdf";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            // cleanup memory
+            window.URL.revokeObjectURL(url);
+            return response;
+        } catch (error) {
+            console.error("Error generating resume PDF:", error);
+        } finally {
+            setLoading(false);
+        }
     }
-};
 
 
     const deleteReport = async (reportId) => {
