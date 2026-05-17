@@ -58,7 +58,8 @@ const handleUserRegistration = async (req, res) => {
         // set cookie
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false, // true in production (HTTPS)
+            secure: true, // true in production (HTTPS)
+            sameSite: "None", // 'None' for cross-site cookies
             maxAge: 24 * 60 * 60 * 1000
         });
 
@@ -114,14 +115,18 @@ const handleUserLogin = async (req, res) => {
     const token = jwt.sign(
         {
             id: isUserExist._id,
-            email: email,
-            password: password
+            email: email
         },
         process.env.SECRET_KEY,
         { expiresIn: "1d" }
     )
 
-    res.cookie("token", token);
+    res.cookie("token", token,{
+        httpOnly: true,
+        secure: true, // true in production (HTTPS)
+        sameSite: "None", // 'None' for cross-site cookies
+        maxAge: 24 * 60 * 60 * 1000
+    });
     return res.status(201).json({
         message: "User logedin successfully",
         user: {
@@ -162,13 +167,17 @@ const handleUserLogout = async (req, res) => {
 
     // await blacklistModel.create({token})
 
-    res.clearCookie("token")
+    res.clearCookie("token",{
+    httpOnly: true,
+    secure: true, // true in production (HTTPS)
+    sameSite: "None", // 'None' for cross-site cookies
+    })
 
     return res.status(200).json({
         message: "loged out successfully"
     })
 
-}
+}   
 
 
 /**
@@ -186,7 +195,6 @@ const handlerGetUser = async(req,res)=>{
             id:user.id,
             email:user.email,
             username:user.username,
-            password:user.password
         }
     })
 }
