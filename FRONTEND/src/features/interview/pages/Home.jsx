@@ -3,6 +3,7 @@ import { AuthContext } from "../../auth/auth.context";
 import { useInterview } from "../hooks/useinterview";
 import { useNavigate } from "react-router-dom";
 import GenerateLoader from "../components/Generateloader";
+import {Astroid} from "lucide-react"
 
 const Home = () => {
   const { loading, generateReport, allReports } = useInterview();
@@ -205,7 +206,7 @@ const Home = () => {
             disabled={loading}
             className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2 bg-linear-to-r from-pink-500 to-pink-600 text-white text-sm font-semibold rounded-lg hover:opacity-90 active:scale-95 transition disabled:opacity-50"
           >
-            ⭐ Generate My Interview Strategy
+            <Astroid size={20} strokeWidth={2} color="yellow" /> Generate My Interview Strategy
           </button>
         </div>
       </div>
@@ -284,14 +285,14 @@ const Home = () => {
                       </div>
                     </div>
 
-                    <div className="flex gap-2 flex-wrap">
+                    <div className="flex gap-2 ">
 
                       <span
                         className={`px-2 py-1 rounded-md text-xs ${
                           report.matchScore > 80
                             ? "bg-green-500/70"
                             : report.matchScore >= 60
-                            ? "bg-yellow-500/50"
+                            ? "bg-yellow-500/90"
                             : "bg-red-500/50"
                         }`}
                       >
@@ -314,6 +315,8 @@ const Home = () => {
                     <button className="text-sm text-pink-400 font-medium group-hover:translate-x-1 transition">
                       View Report →
                     </button>
+
+                    
                   </div>
                 </div>
               ))}
