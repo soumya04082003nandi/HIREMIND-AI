@@ -1,16 +1,18 @@
 import axios from "axios"
 
 
+
+const api= axios.create({
+    baseURL:"http://localhost:3000",
+    withCredentials:true
+})
+
 // register a new user, 
 
 export const register = async ({ username, email, password }) => {
     try {
-        const response = await axios.post("http://localhost:3000/api/auth/register", {
-            username, email, password
-        }, {
-            withCredentials: true
-        })
 
+        const response = await api.post("api/auth/register",{username, email, password})
         return response.data
     } catch (err) {
         console.log(err)
@@ -23,12 +25,9 @@ export const register = async ({ username, email, password }) => {
 
 export const login = async({email,password})=>{
     try {
-        const response = await axios.post('http://localhost:3000/api/auth/login',{
+        const response = await api.post('api/auth/login',{
             email,password
-        },{
-            withCredentials:true
         })
-
         return response.data
     } catch (err) {
         console.log(err)
@@ -40,9 +39,7 @@ export const login = async({email,password})=>{
 
 export const logout = async()=>{
     try {
-        const response= await axios.get('http://localhost:3000/api/auth/logout',{
-            withCredentials:true
-        })
+        const response= await api.get('api/auth/logout')
         return response.data
     } catch (err) {
         console.log(err)
@@ -53,9 +50,7 @@ export const logout = async()=>{
 
 export const getUser= async()=>{
     try {
-        const response=await axios.get('http://localhost:3000/api/auth/get-user',{
-            withCredentials:true
-        })
+        const response=await api.get('api/auth/get-user')
         // console.log(response.data);
         return response.data
     } catch (err) {
