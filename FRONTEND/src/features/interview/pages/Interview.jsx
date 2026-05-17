@@ -122,112 +122,108 @@ const Interview = () => {
 
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-[#0d1117] via-[#111827] to-[#020617] text-white p-6">
+  <div className="min-h-screen bg-linear-to-br from-[#0d1117] via-[#111827] to-[#020617] text-white p-3 sm:p-4 lg:p-6">
 
-      <div className="max-w-7xl mx-auto flex gap-6">
+    <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4 lg:gap-6">
 
-        {/* LEFT NAV */}
-        <nav className="w-55 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-4 flex flex-col justify-between">
+      {/* LEFT NAV */}
+      <nav className="w-full lg:w-56 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-3 sm:p-4 flex flex-col lg:justify-between">
 
-          <div>
-            <p className="text-xs text-gray-400 mb-4 uppercase tracking-wider">
-              Sections
-            </p>
+        <div>
+          <p className="text-xs text-gray-400 mb-3 uppercase tracking-wider">
+            Sections
+          </p>
 
-            <div className="space-y-1">
-              {NAV_ITEMS.map(item => (
-                <button
-                  key={item.id}
-                  onClick={() => setActiveNav(item.id)}
-                  className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all
-                  ${activeNav === item.id
-                      ? "bg-linear-to-r from-pink-500/0 to-purple-500/20 text-white"
-                      : "text-gray-400 hover:bg-white/10 hover:text-white"
-                    }`}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
+          <div className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible">
+            {NAV_ITEMS.map(item => (
+              <button
+                key={item.id}
+                onClick={() => setActiveNav(item.id)}
+                className={`whitespace-nowrap px-3 py-2 rounded-lg text-sm transition-all
+                ${activeNav === item.id
+                    ? "bg-linear-to-r from-pink-500/0 to-purple-500/20 text-white"
+                    : "text-gray-400 hover:bg-white/10 hover:text-white"
+                  }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <button
+          className="mt-4 bg-linear-to-r from-pink-500 to-purple-500 text-white py-2 rounded-lg text-sm hover:opacity-90 transition w-full"
+          onClick={() => { getResumedf(interviewId) }}
+        >
+          Download Resume
+        </button>
+      </nav>
+
+      {/* CENTER */}
+      <main className="flex-1 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-4 sm:p-5 lg:p-6 overflow-y-auto max-h-[70vh] lg:max-h-[90vh]">
+
+        <h2 className="text-lg sm:text-xl font-semibold mb-4 lg:mb-6">
+          {activeNav === "technical" && "Technical Questions"}
+          {activeNav === "behavioral" && "Behavioral Questions"}
+          {activeNav === "roadmap" && "Preparation Roadmap"}
+        </h2>
+
+        <div className="space-y-3">
+          {activeNav === "technical" &&
+            report.technicalQuestions.map((q, i) => (
+              <QuestionCard key={i} item={q} index={i} />
+            ))}
+
+          {activeNav === "behavioral" &&
+            report.behavioralQuestions.map((q, i) => (
+              <QuestionCard key={i} item={q} index={i} />
+            ))}
+
+          {activeNav === "roadmap" &&
+            report.preparationPlan.map(day => (
+              <RoadMapDay key={day.day} day={day} />
+            ))}
+        </div>
+      </main>
+
+      {/* RIGHT SIDEBAR */}
+      <aside className="w-full lg:w-64 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-4 sm:p-5 lg:p-6 flex flex-col gap-6">
+
+        {/* SCORE */}
+        <div className="text-center">
+          <p className="text-xs text-gray-400 mb-2">Match Score</p>
+
+          <div className="w-24 h-24 sm:w-28 sm:h-28 mx-auto rounded-full flex items-center justify-center 
+          bg-linear-to-br from-pink-500 to-purple-500 shadow-lg shadow-pink-500/30">
+            <span className="text-2xl sm:text-3xl font-bold">{report.matchScore}%</span>
           </div>
 
-          <button className="mt-4 bg-linear-to-r from-pink-500 to-purple-500 text-white py-2 rounded-lg text-sm hover:opacity-90 transition"
-          onClick={()=>{getResumedf(interviewId)}}
-          >
-            Download Resume
-          </button>
-        </nav>
+          <p className={`text-sm mt-3 ${report.matchScore >= 80 ? 'text-green-400' : report.matchScore >= 60 ? 'text-yellow-400' : 'text-red-400'}`}>
+            {report.matchScore >= 80 ? "Strong match" : report.matchScore >= 60 ? "Moderate match" : "Poor match"}
+          </p>
+        </div>
 
-        {/* CENTER */}
-        <main className="flex-1 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 overflow-y-auto no-scrollbar max-h-[90vh]">
+        {/* SKILLS */}
+        <div>
+          <p className="text-xs text-gray-400 mb-3">Skill Gaps</p>
 
-          <h2 className="text-xl font-semibold mb-6">
-            {activeNav === "technical" && "Technical Questions"}
-            {activeNav === "behavioral" && "Behavioral Questions"}
-            {activeNav === "roadmap" && "Preparation Roadmap"}
-          </h2>
-
-          <div className="space-y-3">
-            {activeNav === "technical" &&
-              report.technicalQuestions.map((q, i) => (
-                <QuestionCard key={i} item={q} index={i} />
-              ))}
-
-            {activeNav === "behavioral" &&
-              report.behavioralQuestions.map((q, i) => (
-                <QuestionCard key={i} item={q} index={i} />
-              ))}
-
-            {activeNav === "roadmap" &&
-              report.preparationPlan.map(day => (
-                <RoadMapDay key={day.day} day={day} />
-              ))}
+          <div className="flex flex-wrap gap-2">
+            {report.skillGaps.map((gap, i) => (
+              <span
+                key={i}
+                className="px-2 py-1 text-xs rounded-full bg-white/10 text-gray-300"
+              >
+                {gap.skill}
+              </span>
+            ))}
           </div>
-        </main>
+        </div>
 
-        {/* RIGHT SIDEBAR */}
-        <aside className="w-65 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-6">
-
-          {/* SCORE */}
-          <div className="text-center">
-            <p className="text-xs text-gray-400 mb-2">Match Score</p>
-
-            <div className="w-28 h-28 mx-auto rounded-full flex items-center justify-center 
-            bg-linear-to-br from-pink-500 to-purple-500 shadow-lg shadow-pink-500/30">
-              <span className="text-3xl font-bold">{report.matchScore}%</span>
-            </div>
-
-            <p className={`text-sm ${report.matchScore >= 80 ? 'text-green-400' : report.matchScore >= 60 ? 'text-yellow-400' : 'text-red-400'} mt-3`}>
-              {report.matchScore >= 80 ? "Strong match" : report.matchScore >= 60 ? "Moderate match" : "Poor match"}
-            </p>
-          </div>
-
-          {/* SKILLS */}
-          <div>
-            <p className="text-xs text-gray-400 mb-3">Skill Gaps</p>
-
-            <div className="flex flex-wrap gap-2">
-              {report.skillGaps.map((gap, i) => (
-                <span
-                  key={i}
-                  className="px-3 py-1 text-xs rounded-full bg-white/10 text-gray-300"
-                >
-                  {gap.skill}
-                </span>
-              ))}
-            </div>
-          </div>
-
-        </aside>
-
-      </div>
-
+      </aside>
 
     </div>
-
-
-
-  )
+  </div>
+)
 }
 
 export default Interview
