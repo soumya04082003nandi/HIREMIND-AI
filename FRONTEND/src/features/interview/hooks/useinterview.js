@@ -1,4 +1,4 @@
-import { generateInterviewReport, getInterviewReportById, getAllReportsForUser, generateResumePdf } from '../services/interview.api'
+import { generateInterviewReport, getInterviewReportById, getAllReportsForUser, generateResumePdf, deleteReportById } from '../services/interview.api'
 import { useContext, useEffect } from 'react'
 import { InterviewContext } from '../interview.context'
 import { useParams } from 'react-router-dom'
@@ -75,6 +75,27 @@ export const useInterview = () => {
         }
     }
 
+
+    const deleteReport = async (reportId) => {
+        setLoading(true);
+
+        try {
+            const response = await deleteReportById(reportId);
+
+            if (response?.data?.success) {
+                console.log("Report deleted successfully");
+
+                setAllReports((prev) =>
+                    prev.filter((report) => report._id !== reportId)
+                );
+            }
+        } catch (error) {
+            console.error("Error deleting the report", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
         // console.log("use effect ", interviewId);
 
@@ -96,6 +117,7 @@ export const useInterview = () => {
         generateReport,
         fetchReportById,
         fetchAllReportsForUser,
-        getResumedf
+        getResumedf,
+        deleteReport
     };
 }
