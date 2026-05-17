@@ -9,7 +9,7 @@ const app = express();
 app.use(cookieParesr())
 app.use(express.json());
 app.use(cors({
-    origin: "https://hiremind-ai-f33f.onrender.com",
+    origin: "https://hiremind-ai-git-main-soumyanandi2003-4990s-projects.vercel.app/",
     credentials:true
 }))
 
