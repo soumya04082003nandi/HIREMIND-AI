@@ -1,11 +1,17 @@
 import axios from "axios"
 
+// claud help
+const api = axios.create({
+  baseURL: "/",
+  withCredentials: true,
+});
+
 
 // for production deployment
-const api= axios.create({
-    baseURL:"https://hiremind-ai-f33f.onrender.com",
-    withCredentials:true
-})
+// const api= axios.create({
+//     baseURL:"https://hiremind-ai-f33f.onrender.com",
+//     withCredentials:true
+// })
 
 // // for local development
 // const api= axios.create({

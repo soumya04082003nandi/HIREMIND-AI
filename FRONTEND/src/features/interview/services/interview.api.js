@@ -1,10 +1,18 @@
 import axios from 'axios';
 
-//for production
+
+// claud help
 const api = axios.create({
-  baseURL: "https://hiremind-ai-f33f.onrender.com",
+  baseURL: "/",
   withCredentials: true,
 });
+
+
+// //for production
+// const api = axios.create({
+//   baseURL: "https://hiremind-ai-f33f.onrender.com",
+//   withCredentials: true,
+// });
 
 // //for local development
 // const api = axios.create({
