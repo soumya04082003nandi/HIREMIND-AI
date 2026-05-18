@@ -4,7 +4,7 @@ require("dotenv").config()
 
 
 
-const getUser = (req, res, next) => {
+ const getUser = (req, res, next) => {
     const token = req.cookies.token;
     console.log("cookie", req.cookies);
     console.log("token", token);
@@ -33,6 +33,8 @@ const getUser = (req, res, next) => {
     }
 };
 
+module.exports = {
+    getUser
+};
 
 
-module.exports={getUser}
