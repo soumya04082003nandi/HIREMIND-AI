@@ -8,10 +8,18 @@ const cors =require("cors")
 const app = express();
 app.use(cookieParesr())
 app.use(express.json());
+
+//for production deployment
 app.use(cors({
     origin: "https://hiremind.online",
     credentials:true
 }))
+
+//for local development
+// app.use(cors({
+//     origin: "http://localhost:5173",
+//     credentials:true
+// }))
 
 
 /**

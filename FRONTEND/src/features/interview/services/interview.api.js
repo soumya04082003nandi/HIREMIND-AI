@@ -1,9 +1,16 @@
 import axios from 'axios';
 
+//for production
 const api = axios.create({
   baseURL: "https://hiremind-ai-f33f.onrender.com",
   withCredentials: true,
 });
+
+// //for local development
+// const api = axios.create({
+//   baseURL: "http://localhost:3000",
+//   withCredentials: true,
+// });
 
 //function to call the handleGenerateInterviewReport controller for generating the report using the AI
 export const generateInterviewReport = async ({jobDescription , selfDescription, resumeFile}) => {

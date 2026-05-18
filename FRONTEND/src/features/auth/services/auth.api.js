@@ -1,11 +1,17 @@
 import axios from "axios"
 
 
-
+// for production deployment
 const api= axios.create({
     baseURL:"https://hiremind-ai-f33f.onrender.com",
     withCredentials:true
 })
+
+// // for local development
+// const api= axios.create({
+//     baseURL:"http://localhost:3000",
+//     withCredentials:true
+// })
 
 // register a new user, 
 
