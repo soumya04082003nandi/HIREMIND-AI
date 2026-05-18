@@ -22,6 +22,7 @@ export const useAuth = () => {
             setLoading(true);
             const data = await login({ email, password });
             setUser(data.user);
+            localStorage.setItem("user", JSON.stringify(data.user));
             return data.user
 
         } catch (err) {
@@ -37,6 +38,7 @@ export const useAuth = () => {
             setLoading(true);
             const data = await register({ username, email, password });
             setUser(data.user);
+            localStorage.setItem("user", JSON.stringify(data.user));
             return data.user
         } catch (err) {
             console.error("Register error:", err);
@@ -51,6 +53,7 @@ export const useAuth = () => {
             setLoading(true);
             await logout();
             setUser(null);
+            localStorage.removeItem("user");
             navigate("/")
             
         } catch (err) {
@@ -62,22 +65,24 @@ export const useAuth = () => {
     };
 
 
- useEffect(() => { 
-    const getAndSetUser = async (retries = 3) => {
+  useEffect(() => { 
+    const getAndSetUser = async () => {
+        // 👇 add this — show cached user instantly on reload
+        const cachedUser = localStorage.getItem("user");
+        if (cachedUser) setUser(JSON.parse(cachedUser));
+
         try {
             const data = await getUser();
             if (data && data.user) {
                 setUser(data.user);
+                localStorage.setItem("user", JSON.stringify(data.user)); // keep it fresh
             } else {
                 setUser(null);
+                localStorage.removeItem("user"); // 👈 clear if backend says not logged in
             }
         } catch (error) {
-            if (retries > 0) {
-                // wait 2 seconds and retry
-                setTimeout(() => getAndSetUser(retries - 1), 2000);
-            } else {
-                setUser(null);
-            }
+            // don't clear user here — backend might just be waking up
+            // setUser(null); ← remove this or comment it out
         } finally {
             setLoading(false);
         }
