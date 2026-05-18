@@ -8,6 +8,7 @@ const cors =require("cors")
 const app = express();
 app.use(cookieParesr())
 app.use(express.json());
+app.set("trust proxy", 1);
 
 //for production deployment
 app.use(cors({
