@@ -186,6 +186,8 @@ const handleUserLogout = async (req, res) => {
  */
 
 const handlerGetUser = async(req,res)=>{
+    console.log("handelGetUser hit");
+    
     const user = await userModel.findById(req.user.id);
 
     return res.status(200).json({
