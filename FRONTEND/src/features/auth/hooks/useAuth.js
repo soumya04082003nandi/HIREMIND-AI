@@ -62,21 +62,22 @@ export const useAuth = () => {
     };
 
 
-  useEffect(() => { 
-    const getAndSetUser = async () => {
+ useEffect(() => { 
+    const getAndSetUser = async (retries = 3) => {
         try {
             const data = await getUser();
-            // console.log(data);
-            
-
             if (data && data.user) {
                 setUser(data.user);
             } else {
                 setUser(null);
             }
-
         } catch (error) {
-            setUser(null);
+            if (retries > 0) {
+                // wait 2 seconds and retry
+                setTimeout(() => getAndSetUser(retries - 1), 2000);
+            } else {
+                setUser(null);
+            }
         } finally {
             setLoading(false);
         }
