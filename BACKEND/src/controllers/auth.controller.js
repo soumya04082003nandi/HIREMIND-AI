@@ -131,8 +131,7 @@ const handleUserLogin = async (req, res) => {
         message: "User logedin successfully",
         user: {
             id: isUserExist._id,
-            email: email,
-            password: password
+            email: email
         }
     })
 
