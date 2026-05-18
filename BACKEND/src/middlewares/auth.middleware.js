@@ -6,6 +6,9 @@ require("dotenv").config()
 
 const getUser = (req, res, next) => {
     const token = req.cookies.token;
+    console.log("cookie", req.cookies);
+    console.log("token", token);
+    
 
     // 1. Check cookie exists
     if (!token) {
