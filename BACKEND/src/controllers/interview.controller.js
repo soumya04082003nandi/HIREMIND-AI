@@ -66,7 +66,7 @@ const handleGetAllInterviewReportsForUser = async (req, res) => {
         message:"All interview reports retrieved successfully",
         allReports
     })
-  console.log(allReports);
+//   console.log(allReports);
 };
 
 const handleGenerateResumePdf = async (req,res)=>{
