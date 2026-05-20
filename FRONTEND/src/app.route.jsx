@@ -17,7 +17,7 @@ const Layout = () => {
 }
 export const router = createBrowserRouter([
   {
-    element: <Layout />,   // <-- comma required here
+    element: <Layout />,  
     children: [
       {
         path: "/",
