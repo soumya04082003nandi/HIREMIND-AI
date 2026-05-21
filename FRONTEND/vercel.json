@@ -3,6 +3,10 @@
     {
       "source": "/api/:path*",
       "destination": "https://hiremind-ai-f33f.onrender.com/api/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
