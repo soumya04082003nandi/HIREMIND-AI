@@ -18,6 +18,9 @@ const GeneratePdfLoader = () => {
             <div className="relative flex h-24 w-24 items-center justify-center">
 
               {/* outer ring */}
+
+              // the ponk loader //
+
               <div className="absolute inset-0 rounded-full border-[3px] border-pink-500/20 border-t-pink-500 animate-spin" />
 
               {/* inner ring */}
