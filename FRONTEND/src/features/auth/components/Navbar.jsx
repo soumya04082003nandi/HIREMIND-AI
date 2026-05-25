@@ -42,7 +42,7 @@ const Navbar = () => {
           {!user && (
             <Link
               to="/login"
-              className="hover:text-pink-500 transition duration-300 "
+              className="hover:text-pink-500 transition text-yellow-300 duration-300 "
             >
               Login/Register
             </Link>
