@@ -152,6 +152,9 @@ RULES:
 
   try {
 
+    //checking
+        console.log("Step 1: generateResumePdf called");
+
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
 
@@ -172,6 +175,10 @@ RULES:
       response.text ||
       response.candidates?.[0]?.content?.parts?.[0]?.text;
 
+      //checking
+      console.log("Step 3: HTML extracted");
+
+
     if (!rawHtml) {
       throw new Error("No HTML returned from AI");
     }
@@ -182,6 +189,9 @@ RULES:
       .replace(/```/g, "")
       .trim();
 
+      //checking
+      console.log("Step 4: HTML cleaned");
+
     if (
       !cleanedHtml.includes("<html") &&
       !cleanedHtml.includes("<!DOCTYPE html")
@@ -190,7 +200,14 @@ RULES:
       throw new Error("Invalid HTML returned from AI");
     }
 
+    //checking 
+    console.log("Step 5: Calling PDF generator");
+
     const pdfBuffer = await generatePdfFromHtml(cleanedHtml);
+
+    //checking
+        console.log("Step 6: PDF generated");
+
 
     return pdfBuffer;
 
