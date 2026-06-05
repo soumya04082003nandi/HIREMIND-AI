@@ -55,38 +55,42 @@ export const useInterview = () => {
 
     const getResumedf = async (interviewId) => {
         setLoading(true);
-        let response = null;
+
         try {
-            response = await generateResumePdf({ interviewId });
-            const url = window.URL.createObjectURL(new Blob([response], { type: 'application/pdf' }));
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = "resume.pdf";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            // cleanup memory
-            window.URL.revokeObjectURL(url);
-            return response;
+            const response = await generateResumePdf({ interviewId });
+
+            const blob = new Blob([response], {
+                type: "application/pdf",
+            });
+
+            const url = URL.createObjectURL(blob);
+
+            // Better mobile support
+            window.open(url, "_blank");
+
+            setTimeout(() => {
+                URL.revokeObjectURL(url);
+            }, 10000);
+
         } catch (error) {
             console.error("Error generating resume PDF:", error);
         } finally {
             setLoading(false);
         }
-    }
+    };
 
 
     const deleteReport = async (reportId) => {
         setLoading(true);
         console.log("hit, id ", reportId);
-        
+
 
         try {
             const response = await deleteReportById(reportId);
 
-           setAllReports((prev) =>
-                    prev.filter((report) => report._id !== reportId)
-                );
+            setAllReports((prev) =>
+                prev.filter((report) => report._id !== reportId)
+            );
         } catch (error) {
             console.error("Error deleting the report", error);
         } finally {
