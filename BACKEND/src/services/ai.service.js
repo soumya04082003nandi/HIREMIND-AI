@@ -171,6 +171,9 @@ RULES:
       },
     });
 
+    //checking
+     console.log("Step 2: Gemini response received");
+
     const rawHtml =
       response.text ||
       response.candidates?.[0]?.content?.parts?.[0]?.text;
