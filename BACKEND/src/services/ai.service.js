@@ -206,13 +206,47 @@ RULES:
 
 
 
+// const generatePdfFromHtml = async (htmlContent) => {
+//   const browser = await puppeteer.launch();
+//   const page = await browser.newPage();
+//   await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+//   const pdfBuffer = await page.pdf({ format: 'A4' });
+//   await browser.close();
+//   return pdfBuffer;
+// }
+
 const generatePdfFromHtml = async (htmlContent) => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
-  const pdfBuffer = await page.pdf({ format: 'A4' });
-  await browser.close();
-  return pdfBuffer;
-}
+  try {
+    console.log("Launching browser...");
+
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+      ],
+    });
+
+    console.log("Browser launched");
+
+    const page = await browser.newPage();
+
+    await page.setContent(htmlContent, {
+      waitUntil: "networkidle0",
+    });
+
+    const pdfBuffer = await page.pdf({
+      format: "A4",
+      printBackground: true,
+    });
+
+    await browser.close();
+
+    return pdfBuffer;
+  } catch (error) {
+    console.error("PDF generation error:", error);
+    throw error;
+  }
+};
 
 module.exports = { generateInterviewReport, generateResumePdf };
