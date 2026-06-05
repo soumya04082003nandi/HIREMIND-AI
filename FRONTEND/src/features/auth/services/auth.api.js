@@ -1,10 +1,10 @@
 import axios from "axios"
 
-// // claud help
-// const api = axios.create({
-//   baseURL: "/",
-//   withCredentials: true,
-// });
+// claud help
+const api = axios.create({
+  baseURL: "/",
+  withCredentials: true,
+});
 
 
 // for production deployment
@@ -13,11 +13,11 @@ import axios from "axios"
 //     withCredentials:true
 // })
 
-// for local development
-const api= axios.create({
-    baseURL:"http://localhost:3000",
-    withCredentials:true
-})
+// // for local development
+// const api= axios.create({
+//     baseURL:"http://localhost:3000",
+//     withCredentials:true
+// })
 
 // register a new user, 
 
