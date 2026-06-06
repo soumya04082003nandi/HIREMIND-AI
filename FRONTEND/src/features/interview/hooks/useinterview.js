@@ -55,7 +55,7 @@ export const useInterview = () => {
 
     const getResumedf = async (interviewId) => {
         setLoading(true);
-        let response = null;
+        let response = null; 
         try {
             response = await generateResumePdf({ interviewId });
             const url = window.URL.createObjectURL(new Blob([response], { type: 'application/pdf' }));
