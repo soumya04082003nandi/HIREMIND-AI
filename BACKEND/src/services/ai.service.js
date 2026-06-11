@@ -2,7 +2,8 @@ const { GoogleGenAI } = require("@google/genai");
 require("dotenv").config();
 const { z } = require('zod')
 const { zodToJsonSchema } = require("zod-to-json-schema")
-const puppeteer = require("puppeteer")
+const puppeteer = require("puppeteer-core")
+const chromium = require("@sparticuz/chromium")
 
 // ✅ Initialize AI
 const ai = new GoogleGenAI({
@@ -237,23 +238,14 @@ RULES:
 
 const generatePdfFromHtml = async (htmlContent) => {
   try {
-    console.log("Launching browser...");
-
     const browser = await puppeteer.launch({
-      headless: true,
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-      ],
+      args: chromium.args,
+      executablePath: await chromium.executablePath(),
+      headless: chromium.headless,
     });
-
-    console.log("Browser launched");
 
     const page = await browser.newPage();
-
-    await page.setContent(htmlContent, {
-      waitUntil: "networkidle0",
-    });
+    await page.setContent(htmlContent, { waitUntil: "networkidle0" });
 
     const pdfBuffer = await page.pdf({
       format: "A4",
@@ -261,8 +253,8 @@ const generatePdfFromHtml = async (htmlContent) => {
     });
 
     await browser.close();
-
     return pdfBuffer;
+
   } catch (error) {
     console.error("PDF generation error:", error);
     throw error;
