@@ -226,22 +226,14 @@ RULES:
 };
 
 
-
-// const generatePdfFromHtml = async (htmlContent) => {
-//   const browser = await puppeteer.launch();
-//   const page = await browser.newPage();
-//   await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
-//   const pdfBuffer = await page.pdf({ format: 'A4' });
-//   await browser.close();
-//   return pdfBuffer;
-// }
-
 const generatePdfFromHtml = async (htmlContent) => {
   try {
+    const executablePath = await chromium.executablePath();
+    
     const browser = await puppeteer.launch({
       args: chromium.args,
-      executablePath: await chromium.executablePath(),
-      headless: chromium.headless,
+      executablePath: executablePath,
+      headless: "new", // 👈 try "new" instead of chromium.headless
     });
 
     const page = await browser.newPage();
