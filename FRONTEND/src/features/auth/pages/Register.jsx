@@ -27,7 +27,7 @@ const Register = () => {
   }
   return (
 
-    <main className=" relative min-h-[calc(100vh+72px)] flex items-center justify-center overflow-hidden  bg-linear-to-br from-[#0d1117] via-[#111827] to-[#020617]">
+    <main className=" relative min-h-[calc(100vh-61px)] flex items-center justify-center overflow-hidden  bg-linear-to-br from-[#0d1117] via-[#111827] to-[#020617]">
 
       <div className="absolute -top-25 -left-25 w-72 h-72 bg-pink-500/20 rounded-full blur-3xl"></div>
 
