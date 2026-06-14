@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {  Link ,useNavigate} from "react-router-dom";
 import { useAuth } from '../hooks/useAuth';
 import Loading from '../components/Loading';
+import {Eye, EyeOff} from "lucide-react"
 
 const Login = () => {
   const {loading, handleLogin,} = useAuth()
@@ -15,6 +16,8 @@ const Login = () => {
     if(user)navigate("/home")      
         
   }
+
+  const [showPass, setShowPass]=useState(false)
 
   if(loading){
     return <Loading/>
@@ -87,7 +90,7 @@ const Login = () => {
       </div>
 
       {/* Password */}
-      <div className="flex flex-col gap-2">
+      <div className="flex relative flex-col gap-2">
         <label htmlFor="password" className="text-sm text-gray-200">
           Password
         </label>
@@ -96,7 +99,7 @@ const Login = () => {
           onChange={(e) => {
             setPassword(e.target.value);
           }}
-          type="password"
+          type={showPass? "text":"password"}
           id="password"
           name="password"
           placeholder="Enter password"
@@ -118,6 +121,12 @@ const Login = () => {
             duration-300
           "
         />
+        {!showPass
+           ?<EyeOff className=' absolute right-3 bottom-3' onClick={(e)=>{setShowPass(true)}}/>
+           :<Eye className=' absolute right-3 bottom-3' onClick={(e)=>{setShowPass(false)}}/>
+
+        }
+       
       </div>
 
       {/* Button */}
