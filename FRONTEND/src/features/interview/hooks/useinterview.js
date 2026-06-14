@@ -70,6 +70,7 @@ export const useInterview = () => {
             return response;
         } catch (error) {
             console.error("Error generating resume PDF:", error);
+            throw error; // re-throw the error to be handled by the caller if needed
         } finally {
             setLoading(false);
         }

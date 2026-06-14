@@ -69,30 +69,43 @@ const handleGetAllInterviewReportsForUser = async (req, res) => {
 //   console.log(allReports);
 };
 
-const handleGenerateResumePdf = async (req,res)=>{
-  const {interviewId} = req.params
+const handleGenerateResumePdf = async (req, res) => {
+  try {
+    const { interviewId } = req.params;
 
-  const interviewReport =await interviewReportModel.findById(interviewId);
+    const interviewReport = await interviewReportModel.findById(interviewId);
 
-  if(!interviewReport){
-    return res.status(404).json({
-        message:"Interview report not found."
-    })}
-    const {resume,jobDescription,selfDescription}= interviewReport
-    // console.log({
-    //     resume, selfDescription,jobDescription
-    // });
-    
-    const pdfBuffer= await generateResumePdf({resume,jobDescription, selfDescription})
+    if (!interviewReport) {
+      return res.status(404).json({
+        success: false,
+        message: "Interview report not found.",
+      });
+    }
+
+    const { resume, jobDescription, selfDescription } = interviewReport;
+
+    const pdfBuffer = await generateResumePdf({
+      resume,
+      jobDescription,
+      selfDescription,
+    });
 
     res.set({
-        "Content-type":"Application/pdf",
-        "Content-Disposition":`attachment; filename=resume_${interviewId}.pdf`
-    })
+      "Content-Type": "application/pdf",
+      "Content-Disposition": `attachment; filename=resume_${interviewId}.pdf`,
+    });
 
-    res.send(pdfBuffer)
+    return res.send(pdfBuffer);
+  } catch (error) {
+    console.error("PDF Controller Error:", error);
 
-}
+    return res.status(500).json({
+      success: false,
+      code: "PDF_GENERATION_FAILED",
+      message: error.message || "Failed to generate PDF",
+    });
+  }
+};
 
 // Deleting a specific report
 const handleDeleteReport= async (req,res)=>{
