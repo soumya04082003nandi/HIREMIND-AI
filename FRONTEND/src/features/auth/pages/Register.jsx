@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import Loading from '../components/Loading';
+import{Eye,EyeOff} from "lucide-react"
 
 const Register = () => {
 
@@ -10,6 +11,9 @@ const Register = () => {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [showPass, setShowPass]=useState(false)
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = await handleRegister({ username, email, password })
@@ -113,13 +117,13 @@ const Register = () => {
 
 
           {/* Password */}
-          <div className="flex flex-col gap-1">
+          <div className="password-container relative flex flex-col gap-1">
             <label htmlFor="password" className="text-sm text-gray-200">
               Password
             </label>
             <input
               onChange={(e) => { setPassword(e.target.value) }}
-              type="password"
+              type={showPass ? "text" : "password"}
               id="password"
               name="password"
               placeholder="Enter password"
@@ -139,6 +143,12 @@ const Register = () => {
             transition-all
             duration-300"
             />
+            {/* hide and show password */}
+            {!showPass
+              ? <EyeOff className=' absolute right-3 bottom-3' onClick={(e) => { setShowPass(true) }} />
+              : <Eye className=' absolute right-3 bottom-3' onClick={(e) => { setShowPass(false) }} />
+
+            }
           </div>
 
           {/* Button */}

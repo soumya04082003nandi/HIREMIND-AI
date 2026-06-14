@@ -9,6 +9,7 @@ const Login = () => {
   const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [showPass, setShowPass]=useState(false)
 
   const handleSubmit = async(e)=>{
     e.preventDefault(); 
@@ -17,7 +18,6 @@ const Login = () => {
         
   }
 
-  const [showPass, setShowPass]=useState(false)
 
   if(loading){
     return <Loading/>
@@ -121,6 +121,7 @@ const Login = () => {
             duration-300
           "
         />
+        {/* hide and show */}
         {!showPass
            ?<EyeOff className=' absolute right-3 bottom-3' onClick={(e)=>{setShowPass(true)}}/>
            :<Eye className=' absolute right-3 bottom-3' onClick={(e)=>{setShowPass(false)}}/>
