@@ -1,9 +1,29 @@
 import { X, AlertCircle } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Errorpopup = ({ onClose }) => {
 
   const [popOpen, setPopOpen] = useState(true)
+const [timestamp, setTimestamp] = useState("");
+
+//Update timestamp
+useEffect(() => {
+  const updateTime = () => {
+    const now = new Date();
+
+    setTimestamp(
+      now.toLocaleTimeString("en-GB", { hour12: false }) +
+      "." +
+      String(now.getMilliseconds()).padStart(3, "0")
+    );
+  };
+
+  updateTime();
+
+  const interval = setInterval(updateTime, 1000);
+
+  return () => clearInterval(interval);
+}, []);
   return (
     <div  onClick={(e)=>{
             setPopOpen(false)
@@ -37,12 +57,12 @@ const Errorpopup = ({ onClose }) => {
         </div>
 
         {/* Title */}
-        <h2 className="mt-8 text-center text-4xl font-bold text-white">
+        <h2 className="mt-8 text-center orbitron  text-4xl font-bold text-white">
           System Unavailable
         </h2>
 
         {/* Description */}
-        <p className="mt-4 text-center text-gray-400 text-lg leading-relaxed">
+        <p className="mt-4 text-center audiowide text-gray-400 text-lg leading-relaxed">
           AI is not working at the moment, please try after some time
         </p>
 
@@ -53,7 +73,7 @@ const Errorpopup = ({ onClose }) => {
               Error Code
             </span>
 
-            <span className="font-mono text-pink-500">
+            <span className="font-mono text-red-500">
               0xAI_UNAVAILABLE
             </span>
           </div>
@@ -64,7 +84,7 @@ const Errorpopup = ({ onClose }) => {
             </span>
 
             <span className="font-mono text-gray-300">
-              16:42:01.026
+              {timestamp}
             </span>
           </div>
         </div>
@@ -74,7 +94,7 @@ const Errorpopup = ({ onClose }) => {
          onClick={(e)=>{
             setPopOpen(false)
           }}
-          className="mt-8 w-full rounded-xl bg-[#ff2d55] py-4 text-lg font-semibold text-white transition hover:bg-[#ff1d45] shadow-[0_0_30px_rgba(255,45,85,0.35)]"
+          className="mt-8 w-full rounded-xl bg-pink-700 py-3 text-lg font-semibold text-white transition hover:bg-[#ff1d45] active:scale-95 shadow-[0_0_20px_rgba(255,45,85,0.35)]"
         >
           Dismiss Notification
         </button>

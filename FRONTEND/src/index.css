@@ -26,6 +26,13 @@ body ::-webkit-scrollbar{
   scrollbar-width: none;
 }
 
+.orbitron {
+  font-family: 'Orbitron', sans-serif;
+}
+.audiowide{
+  font-family: 'Audiowide', cursive;
+}
+
 .cursiv {
   font-family: "Dancing Script", cursive;
   font-optical-sizing: auto;

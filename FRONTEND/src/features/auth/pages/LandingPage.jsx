@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom"
 import { PenLine,Waypoints,FileUser } from "lucide-react";
-// import Errorpopup from "../components/Errorpopup";
+import Errorpopup from "../components/Errorpopup";
 
 export default function LandingPage() {
   return (
