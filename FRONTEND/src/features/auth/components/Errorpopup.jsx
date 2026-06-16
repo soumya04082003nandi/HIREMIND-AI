@@ -1,16 +1,29 @@
 import { X, AlertCircle } from "lucide-react";
+import { useState } from "react";
 
 const Errorpopup = ({ onClose }) => {
+
+  const [popOpen, setPopOpen] = useState(true)
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-      <div className="relative w-full max-w-md rounded-2xl border border-white/10 bg-[#0d1020] p-8 shadow-[0_0_40px_rgba(0,0,0,0.6)]">
+    <div  onClick={(e)=>{
+            setPopOpen(false)
+          }}
+     className={`fixed inset-0 z-50  items-center ${!popOpen ? 'hidden' :'flex'} justify-center bg-black/70 backdrop-blur-sm p-4`}>
+      <div onClick={(e)=>{
+        e.stopPropagation()
+            
+          }}
+       className="relative w-full max-w-md rounded-2xl border border-white/10 bg-[#0d1020] p-8 shadow-[0_0_40px_rgba(0,0,0,0.6)]">
         
         {/* Close Button */}
         <button
-          onClick={onClose}
           className="absolute right-5 top-5 text-gray-500 hover:text-white transition"
         >
-          <X size={20} />
+          <X size={20}
+          onClick={(e)=>{
+            setPopOpen(false)
+          }}
+          />
         </button>
 
         {/* Icon */}
@@ -18,7 +31,7 @@ const Errorpopup = ({ onClose }) => {
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-pink-500/15">
             <AlertCircle
               size={28}
-              className=" fill-pink-500"
+              className=" fill-pink-500 "
             />
           </div>
         </div>
@@ -58,7 +71,9 @@ const Errorpopup = ({ onClose }) => {
 
         {/* Button */}
         <button
-          onClick={onClose}
+         onClick={(e)=>{
+            setPopOpen(false)
+          }}
           className="mt-8 w-full rounded-xl bg-[#ff2d55] py-4 text-lg font-semibold text-white transition hover:bg-[#ff1d45] shadow-[0_0_30px_rgba(255,45,85,0.35)]"
         >
           Dismiss Notification
