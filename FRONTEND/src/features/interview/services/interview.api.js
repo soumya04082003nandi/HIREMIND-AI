@@ -44,11 +44,16 @@ export const getAllReportsForUser = async ()=>{
 
 
 //function to call the generateResumePdf to generate the resume pdf for a specific interview report
-export const generateResumePdf = async ({interviewId})=>{ 
-  const response = await api.get(`/api/interview/generate-resume-pdf/${interviewId}`, {
-    responseType: "blob",
-  });
-  return response.data
+export const generateResumePdf = async ({ interviewId }) => {
+  try {
+    const response = await api.get(`/api/interview/generate-resume-pdf/${interviewId}`, {
+      responseType: "blob",
+    });
+    return response.data
+  }catch(error){
+    throw error;
+  }
+  
 }
 
 //function to call the handleDeleteReport controller  for deleting a report

@@ -3,6 +3,7 @@ import { useInterview } from "../hooks/useinterview"
 import { useParams } from "react-router-dom"
 import GenerateLoader from "../components/Generateloader"
 import GeneratePdfLoader from "../components/GeneratePdfLoader"
+import Errorpopup from "../../auth/components/Errorpopup"
 
 
 const NAV_ITEMS = [
@@ -107,7 +108,7 @@ const RoadMapDay = ({ day }) => (
 const Interview = () => {
   const [activeNav, setActiveNav] = useState("technical")
   const { interviewId } = useParams()
-  const { report,allReports,getResumedf,loading } = useInterview();
+  const { report,allReports,getResumedf,loading,aiServerBusy } = useInterview();
 
   if (!report) {
     return (
@@ -119,11 +120,14 @@ const Interview = () => {
     if(loading){
       return(<GeneratePdfLoader />)
     }
+    if (aiServerBusy) {
+      return(<Errorpopup/>)
+    }
 
 
   return (
   <div className="min-h-screen bg-linear-to-br from-[#0d1117] via-[#111827] to-[#020617] text-white p-3 sm:p-4 lg:p-6">
-
+    
     <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4 lg:gap-6">
 
       {/* LEFT NAV */}

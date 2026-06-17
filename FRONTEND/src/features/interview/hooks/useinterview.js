@@ -12,7 +12,7 @@ export const useInterview = () => {
         throw new Error("useInterview must be used within an InterviewProvider");
     }
 
-    const { loading, setLoading, report, setReport, allReports, setAllReports } = context;
+    const { loading, setLoading, report, setReport, allReports, setAllReports, aiServerBusy , setAiServerBusy } = context;
 
     const generateReport = async ({ jobDescription, selfDescription, resumeFile }) => {
         setLoading(true);
@@ -70,6 +70,7 @@ export const useInterview = () => {
             return response;
         } catch (error) {
             console.error("Error generating resume PDF:", error);
+            setAiServerBusy(true); // Set the AI server busy state to true
             throw error; // re-throw the error to be handled by the caller if needed
         } finally {
             setLoading(false);
@@ -113,6 +114,8 @@ export const useInterview = () => {
         setReport,
         allReports,
         setAllReports,
+        aiServerBusy,
+        setAiServerBusy,
         generateReport,
         fetchReportById,
         fetchAllReportsForUser,
