@@ -54,11 +54,12 @@ export const useInterview = () => {
 
 
     const getResumedf = async (interviewId) => {
-         if (aiServerBusy) return; // 🔴 prevents accidental retry loops
         setLoading(true);
         let response = null; 
         try {
             response = await generateResumePdf({ interviewId });
+            console.log("hook layer getresume fun " , response);
+            
             const url = window.URL.createObjectURL(new Blob([response], { type: 'application/pdf' }));
             const link = document.createElement('a');
             link.href = url;
