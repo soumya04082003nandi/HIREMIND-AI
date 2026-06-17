@@ -1,11 +1,12 @@
 import {Link} from "react-router-dom"
 import { PenLine,Waypoints,FileUser } from "lucide-react";
-
+import Errorpopup from "../components/Errorpopup";
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-linear-to-br from-[#0d1117] via-[#111827] to-[#020617] text-white">
 
+      <Errorpopup></Errorpopup>
       {/* Background Glow */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
         <div className="absolute w-125 h-125 bg-blue-500 rounded-full blur-[160px] opacity-20 -top-25 -left-25"></div>
