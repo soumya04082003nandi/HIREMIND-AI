@@ -99,6 +99,8 @@ const handleGenerateResumePdf = async (req, res) => {
   } catch (error) {
     console.error("PDF Controller Error:", error);
 
+    throw new Error("Failed to generate PDF: " + error.message);
+
     return res.status(500).json({
       success: false,
       code: "PDF_GENERATION_FAILED",
