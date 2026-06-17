@@ -1,48 +1,57 @@
 import { X, AlertCircle } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useInterview } from "../../interview/hooks/useinterview";
+import { useNavigate } from "react-router-dom";
 
 const Errorpopup = ({ onClose }) => {
 
   const [popOpen, setPopOpen] = useState(true)
-const [timestamp, setTimestamp] = useState("");
+  const [timestamp, setTimestamp] = useState("");
+  const { report } = useInterview()
 
-//Update timestamp
-useEffect(() => {
-  const updateTime = () => {
-    const now = new Date();
+  const navigate = useNavigate()
 
-    setTimestamp(
-      now.toLocaleTimeString("en-GB", { hour12: false }) +
-      "." +
-      String(now.getMilliseconds()).padStart(3, "0")
-    );
-  };
+  //Update timestamp
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
 
-  updateTime();
+      setTimestamp(
+        now.toLocaleTimeString("en-GB", { hour12: false }) +
+        "." +
+        String(now.getMilliseconds()).padStart(3, "0")
+      );
+    };
 
-  const interval = setInterval(updateTime, 1000);
+    updateTime();
 
-  return () => clearInterval(interval);
-}, []);
+    const interval = setInterval(updateTime, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div  onClick={(e)=>{
-            setPopOpen(false)
-          }}
-     className={`fixed inset-0 z-50  items-center ${!popOpen ? 'hidden' :'flex'} justify-center bg-black/70 backdrop-blur-sm p-4`}>
-      <div onClick={(e)=>{
+    <div onClick={(e) => {
+      setPopOpen(false)
+      navigate(`/interview/report/${report._id}`)
+
+    }}
+      className={`fixed inset-0 z-50  items-center ${!popOpen ? 'hidden' : 'flex'} justify-center bg-black/70 backdrop-blur-sm p-4`}>
+      <div onClick={(e) => {
         e.stopPropagation()
-            
-          }}
-       className="relative w-full max-w-md rounded-2xl border border-white/10 bg-[#0d1020] p-8 shadow-[0_0_40px_rgba(0,0,0,0.6)]">
-        
+
+      }}
+        className="relative w-full max-w-md rounded-2xl border border-white/10 bg-[#0d1020] p-8 shadow-[0_0_40px_rgba(0,0,0,0.6)]">
+
         {/* Close Button */}
         <button
           className="absolute right-5 top-5 text-gray-500 hover:text-white transition"
         >
           <X size={20}
-          onClick={(e)=>{
-            setPopOpen(false)
-          }}
+            onClick={(e) => {
+              setPopOpen(false)
+              navigate(`/interview/report/${report._id}`)
+            }}
           />
         </button>
 
@@ -91,8 +100,10 @@ useEffect(() => {
 
         {/* Button */}
         <button
-         onClick={(e)=>{
+          onClick={(e) => {
             setPopOpen(false)
+            navigate(`/interview/report/${report._id}`)
+
           }}
           className="mt-8 w-full rounded-xl bg-pink-700 py-3 text-lg font-semibold text-white transition hover:bg-[#ff1d45] active:scale-95 shadow-[0_0_20px_rgba(255,45,85,0.35)]"
         >
