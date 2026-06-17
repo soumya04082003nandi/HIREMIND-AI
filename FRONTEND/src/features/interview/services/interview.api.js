@@ -49,8 +49,11 @@ export const generateResumePdf = async ({ interviewId }) => {
     const response = await api.get(`/api/interview/generate-resume-pdf/${interviewId}`, {
       responseType: "blob",
     });
+    console.log("api layer generateResumePdf fun " , response);
+    
     return response.data
   }catch(error){
+    log("api layer generateResumePdf fun catch block:", error);
     throw error;
   }
   
