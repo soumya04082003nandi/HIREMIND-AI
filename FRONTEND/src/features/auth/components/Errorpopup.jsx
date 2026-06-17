@@ -33,6 +33,7 @@ const Errorpopup = ({ onClose }) => {
   return (
     <div onClick={(e) => {
       setPopOpen(false)
+      navigate(`/interview/report/${report._id}`)
 
     }}
       className={`fixed inset-0 z-50  items-center ${!popOpen ? 'hidden' : 'flex'} justify-center bg-black/70 backdrop-blur-sm p-4`}>
@@ -49,7 +50,7 @@ const Errorpopup = ({ onClose }) => {
           <X size={20}
             onClick={(e) => {
               setPopOpen(false)
-            
+              navigate(`/interview/report/${report._id}`)
             }}
           />
         </button>
@@ -101,6 +102,7 @@ const Errorpopup = ({ onClose }) => {
         <button
           onClick={(e) => {
             setPopOpen(false)
+            navigate(`/interview/report/${report._id}`)
 
           }}
           className="mt-8 w-full rounded-xl bg-pink-700 py-3 text-lg font-semibold text-white transition hover:bg-[#ff1d45] active:scale-95 shadow-[0_0_20px_rgba(255,45,85,0.35)]"
