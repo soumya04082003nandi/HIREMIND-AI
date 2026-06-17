@@ -54,6 +54,7 @@ export const useInterview = () => {
 
 
     const getResumedf = async (interviewId) => {
+         if (aiServerBusy) return; // 🔴 prevents accidental retry loops
         setLoading(true);
         let response = null; 
         try {
