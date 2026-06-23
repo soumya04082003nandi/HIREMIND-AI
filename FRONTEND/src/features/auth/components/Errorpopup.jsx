@@ -13,9 +13,9 @@ const Errorpopup = () => {
   //Handle the onclick function for the cross symbol and    dismiss button 
   const onClose = () => {
     setPopOpen(false)
-    if (report?._id) {
-      navigate(`/interview/report/${report?._id}`);
-    }
+    // if (report?._id) {
+    //   navigate(`/interview/report/${report?._id}`);
+    // }
   }
 
   //Update timestamp
