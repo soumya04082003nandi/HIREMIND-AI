@@ -10,7 +10,7 @@ const Errorpopup = () => {
   const { report } = useInterview()
   const navigate = useNavigate()
 
-  //Handle the onclick function for the cross symbol and   dismiss button 
+  //Handle the onclick function for the cross symbol and    dismiss button 
   const onClose = () => {
     setPopOpen(false)
     if (report?._id) {
