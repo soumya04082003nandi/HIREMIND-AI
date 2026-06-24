@@ -110,6 +110,12 @@ const Interview = () => {
   const { interviewId } = useParams()
   const { report,allReports,getResumedf,loading,aiServerBusy } = useInterview();
 
+
+
+  if (aiServerBusy) {
+      return(<Errorpopup/>)
+    }
+    
   if (!report) {
     return (
       <GenerateLoader />
@@ -120,9 +126,7 @@ const Interview = () => {
     if(loading){
       return(<GeneratePdfLoader />)
     }
-    if (aiServerBusy) {
-      return(<Errorpopup/>)
-    }
+    
 
 
   return (
