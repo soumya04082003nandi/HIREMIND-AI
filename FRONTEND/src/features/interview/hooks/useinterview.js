@@ -108,7 +108,7 @@ export const useInterview = () => {
         } else {
             fetchAllReportsForUser()
         }
-    }, [interviewId, aiserverBusy]);
+    }, [interviewId, aiServerBusy]);
 
 
     return {
