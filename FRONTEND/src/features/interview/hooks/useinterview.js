@@ -101,12 +101,14 @@ export const useInterview = () => {
     useEffect(() => {
         // console.log("use effect ", interviewId);
 
+        if (aiServerBusy) return ;
+
         if (interviewId) {
             fetchReportById(interviewId)
         } else {
             fetchAllReportsForUser()
         }
-    }, [interviewId]);
+    }, [interviewId, aiserverBusy]);
 
 
     return {
