@@ -7,12 +7,13 @@ const Errorpopup = () => {
 
   const [popOpen, setPopOpen] = useState(true)
   const [timestamp, setTimestamp] = useState("");
-  const { report } = useInterview()
+  const { report, aiServerBusy, setAiServerBusy } = useInterview()
   const navigate = useNavigate()
 
   //Handle the onclick function for the cross symbol and    dismiss button 
   const onClose = () => {
     setPopOpen(false)
+    setAiServerBusy(false)
     // if (report?._id) {
     //   navigate(`/interview/report/${report?._id}`);
     // }
