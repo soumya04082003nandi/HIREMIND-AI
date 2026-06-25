@@ -12,11 +12,7 @@ const Errorpopup = () => {
 
   //Handle the onclick function for the cross symbol and    dismiss button 
   const onClose = () => {
-    setPopOpen(false)
     setAiServerBusy(false)
-    // if (report?._id) {
-    //   navigate(`/interview/report/${report?._id}`);
-    // }
   }
 
   //Update timestamp
@@ -40,7 +36,7 @@ const Errorpopup = () => {
 
   return (
     <div onClick={onClose}
-      className={`fixed inset-0 z-50  items-center ${!popOpen ? 'hidden' : 'flex'} justify-center bg-black/70 backdrop-blur-sm p-4`}>
+      className={`fixed inset-0 z-50  items-center  justify-center bg-black/70 backdrop-blur-sm p-4`}>
       <div onClick={(e) => {
         e.stopPropagation()
 
