@@ -11,8 +11,12 @@ const Login = () => {
   const [password, setPassword] = useState("")
   const [showPass, setShowPass]=useState(false)
 
+  const passwordRegex =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9])[A-Za-z\d!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]{8,}$/;
+
   const handleSubmit = async(e)=>{
     e.preventDefault(); 
+    // console.log(passwordRegex.test(password));
+    
       const user =await handleLogin({email,password})
     if(user)navigate("/home")      
         
