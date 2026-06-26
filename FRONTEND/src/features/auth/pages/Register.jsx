@@ -12,12 +12,24 @@ const Register = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPass, setShowPass]=useState(false)
+  const [validPass, setValidPass]=useState(true)
 
+  //checking wheather the password is strong or not
+  const passwordRegex =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9])[A-Za-z\d!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]{8,}$/;
+  const isPasswordStrong = (checkPass)=>{
+   return(passwordRegex.test(checkPass));
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = await handleRegister({ username, email, password })
-    if (user) navigate("/home")
+
+    if (isPasswordStrong(password)) {
+      const user = await handleRegister({ username, email, password })
+      if (user) navigate("/home")
+
+    }else{
+      setValidPass(false)
+    }
 
   }
 
@@ -150,11 +162,12 @@ const Register = () => {
 
             }
           </div>
+          <small className={`text-xs ${validPass?"hidden":""}  text-red-500`}>Password must contain lovercase, uppercase, digit and special charcter</small>
 
           {/* Button */}
           <button
             type="submit"
-            className=" w-full py-3 rounded-xl bg-linear-to-r from-pink-500 to-pink-600 text-white font-semibold hover:scale-[1.02] hover:shadow-lg hover:shadow-pink-500/30 active:scale-95 transition-all duration-300"
+            className=" w-full py-3 mt-2 rounded-xl bg-linear-to-r from-pink-500 to-pink-600 text-white font-semibold hover:scale-[1.02] hover:shadow-lg hover:shadow-pink-500/30 active:scale-95 transition-all duration-300"
           >
             Register
           </button>
