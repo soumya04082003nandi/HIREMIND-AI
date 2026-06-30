@@ -162,7 +162,7 @@ const Register = () => {
 
             }
           </div>
-          <small className={`text-xs ${validPass?"hidden":""}  text-red-500`}>Password must contain lowercase, uppercase, digit and special charcter</small>
+          <small className={`text-xs ${validPass?"hidden":""}  text-red-500`}>Password must contain lowercase, uppercase, digit and special charcter, min length 8</small>
 
           {/* Button */}
           <button
