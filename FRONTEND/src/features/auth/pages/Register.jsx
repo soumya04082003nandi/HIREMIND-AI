@@ -155,7 +155,7 @@ const Register = () => {
             transition-all
             duration-300"
             />
-            {/* hide and show password */}
+            {/* hide and show  password */}
             {!showPass
               ? <EyeOff className=' absolute right-3 bottom-3' onClick={(e) => { setShowPass(true) }} />
               : <Eye className=' absolute right-3 bottom-3' onClick={(e) => { setShowPass(false) }} />
