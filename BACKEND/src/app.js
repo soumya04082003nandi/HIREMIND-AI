@@ -14,7 +14,7 @@ app.set("trust proxy", 1);
 app.use(cors({
     origin: "https://hiremind.online",
     credentials:true
-})) 
+}))
 
 // //for local development
 // app.use(cors({
