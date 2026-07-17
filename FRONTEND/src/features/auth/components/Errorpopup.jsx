@@ -10,7 +10,7 @@ const Errorpopup = () => {
   const { report, aiServerBusy, setAiServerBusy } = useInterview()
   const navigate = useNavigate()
 
-  //Handle the onclick function for the cross symbol and    dismiss button 
+  //Handle the onclick function for the cross symbol and dismiss button 
   const onClose = () => {
     setAiServerBusy(false)
   }
