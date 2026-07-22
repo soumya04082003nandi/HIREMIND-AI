@@ -79,18 +79,21 @@ Built with the MERN stack and Google's Gemini AI, HireMind AI streamlines the jo
 ```
 HireMind-AI
 │
-├── client/                 # React Frontend
+├── FRONTEND/                 # React Frontend
 │   ├── src/
 │   ├── public/
 │   └── package.json
 │
-├── server/                 # Express Backend
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── middleware/
-│   ├── services/
-│   └── package.json
+├── BACKEND/                 # Express Backend
+|   ├── src/
+|       ├── config/
+│       ├── controllers/
+│       ├── models/
+│       ├── routes/
+│       ├── middlewares/
+│       ├── services/
+|       ├── routes/
+│       └── package.json
 │
 └── README.md
 ```
@@ -102,7 +105,7 @@ HireMind-AI
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/HireMind-AI.git
+git clone https://github.com/soumya04082003nandi/HireMind-AI.git
 cd HireMind-AI
 ```
 
@@ -164,14 +167,28 @@ npm run dev
 
 ## 📸 Screenshots
 
-> Add screenshots of:
->
 > * Landing Page
+
+![Landing Page](./FRONTEND/src/asset/screenshots/landing.png)
+
 > * Dashboard
-> * Resume Analyzer
-> * ATS Resume Generator
+![Dashboard](./FRONTEND/src/asset/screenshots/dashboard.png)
+
+> * My Reports
+![My Reports](./FRONTEND/src/asset/screenshots/my_reports.png)
+
 > * Interview Report
-> * Authentication Pages
+![Interview Rport](./FRONTEND/src/asset/screenshots/interview_report.png)
+
+> * Roadmap
+![Roadmap](./FRONTEND/src/asset/screenshots/roadmap.png)
+
+> * ATS Resume Generator
+![Ats resume generator](./FRONTEND/src/asset/screenshots/generating_cv.png)
+
+> * Generated resume
+![Generated resume](./FRONTEND/src/asset/screenshots/geerated_cv.png)
+
 
 ---
 
