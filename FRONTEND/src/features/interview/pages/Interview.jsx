@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import GenerateLoader from "../components/Generateloader"
 import GeneratePdfLoader from "../components/GeneratePdfLoader"
 import Errorpopup from "../../auth/components/Errorpopup"
+import  {ChevronDown} from "lucide-react"
 
 
 const NAV_ITEMS = [
@@ -54,7 +55,7 @@ const QuestionCard = ({ item, index }) => {
         </p>
 
         <span className={`transition-transform duration-300 ${open ? "rotate-180 text-pink-400" : "text-gray-400"}`}>
-          ▼
+          <ChevronDown />
         </span>
       </div>
 
